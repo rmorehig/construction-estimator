@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Table = ({ data = [] }) => {
+const CustomersList = ({ customers = [], count = 0 }) => {
   return (
     <div class="flex flex-col">
       <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -27,32 +27,35 @@ const Table = ({ data = [] }) => {
               </tr>
             </thead>
             <tbody className="bg-white">
-              {data.map(({ id, name, code, phone, email, city }) => (
-                <tr key={id}>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
-                    {name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {code}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {email}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {phone}
-                  </td>
-                  <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {city}
-                  </td>
-                </tr>
-              ))}
+              {customers.map(({ id, entity }) => {
+                const { name, code, phone, email, city } = entity
+                return (
+                  <tr key={id}>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
+                      {name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                      {code}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                      {email}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                      {phone}
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
+                      {city}
+                    </td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
           <div className="bg-white px-4 py-3 flex items-center justify-betwee sm:px-6 w-full">
             <div className="hidden sm:block">
               <p className="text-sm leading-5 text-gray-700">
-                <span className="font-medium">{data.length}</span>
-                {data.length > 1 ? ' resultados' : ' resultado'}
+                <span className="font-medium">{count}</span>
+                {count > 1 ? ' resultados' : ' resultado'}
               </p>
             </div>
             <div className="flex-1 flex justify-between sm:justify-end">
@@ -76,4 +79,4 @@ const Table = ({ data = [] }) => {
   )
 }
 
-export default Table
+export default CustomersList

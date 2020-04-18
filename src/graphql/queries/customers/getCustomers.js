@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 
-export const GET_PROVIDERS = gql`
+export const GET_CUSTOMERS = gql`
   query getProviders {
-    provider {
+    customer {
       id
       entity {
         id
@@ -15,7 +15,7 @@ export const GET_PROVIDERS = gql`
         city
       }
     }
-    provider_aggregate {
+    customer_aggregate {
       aggregate {
         count
       }
@@ -23,18 +23,18 @@ export const GET_PROVIDERS = gql`
   }
 `
 
-export const useGetProviders = () => {
-  const [providers, setProviders] = useState([])
+export const useGetCustomers = () => {
+  const [customers, setCustomers] = useState([])
   const [count, setCount] = useState(0)
-  const { loading } = useQuery(GET_PROVIDERS, {
+  const { loading } = useQuery(GET_CUSTOMERS, {
     onCompleted: data => {
-      setProviders(data.provider)
-      setCount(data.provider_aggregate.aggregate.count)
+      setCustomers(data.customer)
+      setCount(data.customer_aggregate.aggregate.count)
     },
     fetchPolicy: 'cache-and-network',
   })
   return {
-    providers,
+    customers,
     count,
     loading,
   }
