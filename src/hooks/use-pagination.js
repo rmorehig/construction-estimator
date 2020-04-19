@@ -1,9 +1,10 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react'
 
 const initialValues = {
   limit: 10,
   offset: 0,
   count: 0,
+  queryFilters: {},
 }
 
 const reducer = (state, { type, payload }) => {
@@ -20,15 +21,48 @@ const reducer = (state, { type, payload }) => {
       return { ...state, offset: state.limit + state.offset }
     case 'RESET_PAGINATION':
       return { ...state, limit: 10, offset: 0 }
+    case 'UPDATE_FILTERS':
+      return {
+        ...state,
+        filters: {
+          ...payload,
+        },
+      }
+    case 'UPDATE_QUERY_FILTERS':
+      return {
+        ...state,
+        queryFilters: payload,
+      }
     default:
       return state
   }
 }
 
-export const usePagination = () => {
-  const [{ limit, offset, count }, dispatch] = useReducer(reducer, {
+export const usePagination = (initialFilters = {}) => {
+  const [
+    { limit, offset, count, filters, queryFilters },
+    dispatch,
+  ] = useReducer(reducer, {
     ...initialValues,
+    filters: { ...initialFilters },
   })
+
+  const parseFilters = (filters = {}) => {
+    let queryFilters = {}
+    let properties = Object.getOwnPropertyNames(filters)
+    properties.forEach(property => {
+      queryFilters = {
+        ...queryFilters,
+        [property]: '%' + filters[property] + '%',
+      }
+    })
+    dispatch({ type: 'UPDATE_QUERY_FILTERS', payload: queryFilters })
+  }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => parseFilters(filters), 500)
+    return () => timeout && clearTimeout(timeout)
+  }, [filters])
 
   const setLimit = payload => dispatch({ type: 'SET_LIMIT', payload })
   const setOffset = payload => dispatch({ type: 'SET_OFFSET', payload })
@@ -36,17 +70,21 @@ export const usePagination = () => {
   const nextPage = payload => dispatch({ type: 'NEXT_PAGE', payload })
   const setCount = payload => dispatch({ type: 'SET_COUNT', payload })
   const resetPagination = () => dispatch({ type: 'RESET_PAGINATION' })
+  const updateFilters = payload => dispatch({ type: 'UPDATE_FILTERS', payload })
 
   return {
-    setLimit,
-    setOffset,
     limit,
     offset,
     count,
+    filters,
+    queryFilters,
+    setLimit,
+    setOffset,
     previousPage,
     nextPage,
     setCount,
     resetPagination,
+    updateFilters,
   }
 }
 

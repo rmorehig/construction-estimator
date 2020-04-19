@@ -5,14 +5,47 @@ import { ENTITY_FRAGMENT } from 'graphql/fragments/entity'
 import usePagination from 'hooks/use-pagination'
 
 export const GET_PROVIDERS = gql`
-  query getProviders($limit: Int, $offset: Int) {
-    provider(limit: $limit, offset: $offset) {
+  query getProviders(
+    $limit: Int
+    $offset: Int
+    $name: String
+    $code: String
+    $email: String
+    $phone: String
+    $city: String
+    $country: String
+  ) {
+    provider(
+      limit: $limit
+      offset: $offset
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
       id
       entity {
         ...entityFields
       }
     }
-    provider_aggregate {
+    provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
       aggregate {
         count
       }
@@ -29,12 +62,18 @@ export const useGetProviders = () => {
     nextPage,
     previousPage,
     setCount,
-  } = usePagination()
+    filters,
+    queryFilters,
+    updateFilters,
+  } = usePagination({
+    name: '',
+  })
   const [providers, setProviders] = useState([])
   const { loading } = useQuery(GET_PROVIDERS, {
     variables: {
       limit,
       offset,
+      ...queryFilters,
     },
     onCompleted: data => {
       setProviders(data.provider)
@@ -48,5 +87,7 @@ export const useGetProviders = () => {
     loading,
     nextPage,
     previousPage,
+    filters,
+    updateFilters,
   }
 }
