@@ -5,14 +5,47 @@ import { ENTITY_FRAGMENT } from 'graphql/fragments/entity'
 import usePagination from 'hooks/use-pagination'
 
 export const GET_CUSTOMERS = gql`
-  query getProviders($limit: Int, $offset: Int) {
-    customer(limit: $limit, offset: $offset) {
+  query getCustomers(
+    $limit: Int
+    $offset: Int
+    $name: String
+    $code: String
+    $email: String
+    $phone: String
+    $city: String
+    $country: String
+  ) {
+    customer(
+      limit: $limit
+      offset: $offset
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
       id
       entity {
         ...entityFields
       }
     }
-    customer_aggregate {
+    customer_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
       aggregate {
         count
       }
@@ -29,12 +62,22 @@ export const useGetCustomers = () => {
     nextPage,
     previousPage,
     setCount,
-  } = usePagination()
+    filters,
+    queryFilters,
+    updateFilters,
+  } = usePagination({
+    name: '',
+    code: '',
+    email: '',
+    city: '',
+    phone: '',
+  })
   const [customers, setCustomers] = useState([])
   const { loading } = useQuery(GET_CUSTOMERS, {
     variables: {
-      limit: limit,
-      offset: offset,
+      limit,
+      offset,
+      ...queryFilters,
     },
     onCompleted: data => {
       setCustomers(data.customer)
@@ -48,5 +91,7 @@ export const useGetCustomers = () => {
     loading,
     nextPage,
     previousPage,
+    filters,
+    updateFilters,
   }
 }

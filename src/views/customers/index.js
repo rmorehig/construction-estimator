@@ -4,7 +4,14 @@ import { useGetCustomers } from 'graphql/queries/customers/getCustomers'
 import View from 'components/view'
 
 const Customers = () => {
-  const { customers, count, nextPage, previousPage } = useGetCustomers()
+  const {
+    customers,
+    count,
+    nextPage,
+    previousPage,
+    filters,
+    updateFilters,
+  } = useGetCustomers()
   return (
     <View title="Clientes">
       <CustomersList
@@ -12,6 +19,8 @@ const Customers = () => {
         count={count}
         nextPage={nextPage}
         previousPage={previousPage}
+        filters={filters}
+        updateFilters={updateFilters}
       />
     </View>
   )
