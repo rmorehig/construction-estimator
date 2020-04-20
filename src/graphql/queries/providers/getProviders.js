@@ -67,6 +67,10 @@ export const useGetProviders = () => {
     updateFilters,
   } = usePagination({
     name: '',
+    code: '',
+    email: '',
+    city: '',
+    phone: '',
   })
   const [providers, setProviders] = useState([])
   const { loading } = useQuery(GET_PROVIDERS, {

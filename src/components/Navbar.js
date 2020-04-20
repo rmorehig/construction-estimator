@@ -81,7 +81,7 @@ const Navbar = () => {
                   </button>
                 </div>
                 {menuOpen && (
-                  <div className="origin-top-left absolute right-2 mt-2 w-56 rounded-md shadow-lg">
+                  <div className="origin-top-left absolute right-0 mt-2 w-56 rounded-md shadow-lg">
                     <div className="py-1 rounded-md bg-white shadow-xs">
                       <span className="block px-4 py-2 font-medium text-base text-gray-700 border-b border-gray-200">
                         Alejandro España Orts

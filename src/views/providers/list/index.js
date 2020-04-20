@@ -1,6 +1,14 @@
 import React from 'react'
+import Filter from './filter'
 
-const ProvidersList = ({ providers = [], count, nextPage, previousPage }) => {
+const ProvidersList = ({
+  providers = [],
+  count,
+  nextPage,
+  previousPage,
+  filters,
+  updateFilters,
+}) => {
   return (
     <div className="flex flex-col">
       <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -9,19 +17,49 @@ const ProvidersList = ({ providers = [], count, nextPage, previousPage }) => {
             <thead>
               <tr>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Nombre
+                  <Filter
+                    title="Nombre"
+                    value={filters.name}
+                    onChange={event =>
+                      updateFilters({ name: event.target.value })
+                    }
+                  />
                 </th>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Código
+                  <Filter
+                    title="Código"
+                    value={filters.code}
+                    onChange={event =>
+                      updateFilters({ code: event.target.value })
+                    }
+                  />
                 </th>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Email
+                  <Filter
+                    title="Email"
+                    value={filters.email}
+                    onChange={event =>
+                      updateFilters({ email: event.target.value })
+                    }
+                  />
                 </th>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Teléfono
+                  <Filter
+                    title="Teléfono"
+                    value={filters.phone}
+                    onChange={event =>
+                      updateFilters({ phone: event.target.value })
+                    }
+                  />
                 </th>
                 <th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                  Ciudad
+                  <Filter
+                    title="Ciudad"
+                    value={filters.city}
+                    onChange={event =>
+                      updateFilters({ city: event.target.value })
+                    }
+                  />
                 </th>
               </tr>
             </thead>

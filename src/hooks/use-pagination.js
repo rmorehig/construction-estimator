@@ -53,7 +53,9 @@ export const usePagination = (initialFilters = {}) => {
     properties.forEach(property => {
       queryFilters = {
         ...queryFilters,
-        [property]: '%' + filters[property] + '%',
+        [property]: filters[property]
+          ? '%' + filters[property] + '%'
+          : undefined,
       }
     })
     dispatch({ type: 'UPDATE_QUERY_FILTERS', payload: queryFilters })

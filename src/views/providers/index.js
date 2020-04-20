@@ -14,15 +14,13 @@ const Providers = () => {
   } = useGetProviders()
   return (
     <View title="Proveedores">
-      <input
-        value={filters.name}
-        onChange={event => updateFilters({ name: event.target.value })}
-      />
       <ProvidersList
         providers={providers}
         count={count}
         nextPage={nextPage}
         previousPage={previousPage}
+        filters={filters}
+        updateFilters={updateFilters}
       />
     </View>
   )
