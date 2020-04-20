@@ -25,6 +25,7 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         filters: {
+          ...state.filters,
           ...payload,
         },
       }
