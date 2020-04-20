@@ -65,6 +65,8 @@ export const useGetProviders = () => {
     filters,
     queryFilters,
     updateFilters,
+    hasNext,
+    hasPrevious,
   } = usePagination({
     name: '',
     code: '',
@@ -93,5 +95,7 @@ export const useGetProviders = () => {
     previousPage,
     filters,
     updateFilters,
+    hasNext,
+    hasPrevious,
   }
 }

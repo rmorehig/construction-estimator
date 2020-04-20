@@ -65,6 +65,8 @@ export const useGetCustomers = () => {
     filters,
     queryFilters,
     updateFilters,
+    hasNext,
+    hasPrevious,
   } = usePagination({
     name: '',
     code: '',
@@ -93,5 +95,7 @@ export const useGetCustomers = () => {
     previousPage,
     filters,
     updateFilters,
+    hasNext,
+    hasPrevious,
   }
 }

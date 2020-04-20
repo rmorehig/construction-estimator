@@ -1,14 +1,18 @@
 import React from 'react'
 import Filter from 'components/filter'
+import { useGetCustomers } from 'graphql/queries/customers/getCustomers'
 
-const CustomersList = ({
-  customers = [],
-  count,
-  nextPage,
-  previousPage,
-  filters,
-  updateFilters,
-}) => {
+const CustomersList = () => {
+  const {
+    customers,
+    count,
+    nextPage,
+    previousPage,
+    filters,
+    updateFilters,
+    hasNext,
+    hasPrevious,
+  } = useGetCustomers()
   return (
     <div className="flex flex-col">
       <div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -97,13 +101,23 @@ const CustomersList = ({
             </div>
             <div className="flex-1 flex justify-between sm:justify-end">
               <button
-                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                disabled={!hasPrevious}
+                className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
+                  hasPrevious
+                    ? 'text-gray-700 hover:text-gray-500'
+                    : 'text-gray-300 cursor-default'
+                } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                 onClick={previousPage}
               >
                 Anterior
               </button>
               <button
-                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+                disabled={!hasNext}
+                className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md bg-white ${
+                  hasNext
+                    ? 'text-gray-700 hover:text-gray-500'
+                    : 'text-gray-300 cursor-default'
+                } focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150`}
                 onClick={nextPage}
               >
                 Siguiente

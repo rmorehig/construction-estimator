@@ -5,6 +5,8 @@ const initialValues = {
   offset: 0,
   count: 0,
   queryFilters: {},
+  hasNext: false,
+  hasPrevious: false,
 }
 
 const reducer = (state, { type, payload }) => {
@@ -20,7 +22,7 @@ const reducer = (state, { type, payload }) => {
     case 'NEXT_PAGE':
       return { ...state, offset: state.limit + state.offset }
     case 'RESET_PAGINATION':
-      return { ...state, limit: 10, offset: 0 }
+      return { ...initialValues }
     case 'UPDATE_FILTERS':
       return {
         ...state,
@@ -34,6 +36,10 @@ const reducer = (state, { type, payload }) => {
         ...state,
         queryFilters: payload,
       }
+    case 'SET_NEXT':
+      return { ...state, hasNext: payload }
+    case 'SET_PREVIOUS':
+      return { ...state, hasPrevious: payload }
     default:
       return state
   }
@@ -41,7 +47,7 @@ const reducer = (state, { type, payload }) => {
 
 export const usePagination = (initialFilters = {}) => {
   const [
-    { limit, offset, count, filters, queryFilters },
+    { limit, offset, count, filters, queryFilters, hasPrevious, hasNext },
     dispatch,
   ] = useReducer(reducer, {
     ...initialValues,
@@ -67,6 +73,11 @@ export const usePagination = (initialFilters = {}) => {
     return () => timeout && clearTimeout(timeout)
   }, [filters])
 
+  useEffect(() => {
+    dispatch({ type: 'SET_NEXT', payload: offset + limit < count })
+    dispatch({ type: 'SET_PREVIOUS', payload: offset > 0 })
+  }, [offset, count, limit])
+
   const setLimit = payload => dispatch({ type: 'SET_LIMIT', payload })
   const setOffset = payload => dispatch({ type: 'SET_OFFSET', payload })
   const previousPage = payload => dispatch({ type: 'PREVIOUS_PAGE', payload })
@@ -88,6 +99,8 @@ export const usePagination = (initialFilters = {}) => {
     setCount,
     resetPagination,
     updateFilters,
+    hasPrevious,
+    hasNext,
   }
 }
 
