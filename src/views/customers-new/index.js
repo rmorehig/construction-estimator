@@ -227,7 +227,7 @@ const CustomersNew = () => {
               Contactos
             </h3>
             <p class="mt-1 text-sm leading-5 text-gray-500">
-              Añade los contactos del cliente.
+              Añade contactos al cliente.
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
