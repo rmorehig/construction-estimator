@@ -1,8 +1,7 @@
 import React from 'react'
 import View from 'components/view'
 import { useFormik } from 'formik'
-import { useAddProvider } from 'graphql/mutations/providers/addProvider'
-
+import { useAddCustomer } from 'graphql/mutations/customers/addCustomer'
 const Action = ({ onClick = () => {} }) => (
   <span class="inline-flex rounded-md shadow-sm">
     <button
@@ -14,8 +13,8 @@ const Action = ({ onClick = () => {} }) => (
     </button>
   </span>
 )
-const ProvidersNew = () => {
-  const { addProvider } = useAddProvider()
+const CustomersNew = () => {
+  const { addCustomer } = useAddCustomer()
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       name: '',
@@ -29,16 +28,16 @@ const ProvidersNew = () => {
       province: '',
       country: '',
     },
-    onSubmit: values => addProvider(values),
+    onSubmit: values => addCustomer(values),
   })
   return (
-    <View title="Nuevo proveedor" action={<Action onClick={handleSubmit} />}>
+    <View title="Nuevo cliente" action={<Action onClick={handleSubmit} />}>
       <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">Perfil</h3>
             <p class="mt-1 text-sm leading-5 text-gray-500">
-              Información general del proveedor.
+              Información general del cliente.
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -225,40 +224,10 @@ const ProvidersNew = () => {
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
             <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Materiales
+              Contactos
             </h3>
             <p class="mt-1 text-sm leading-5 text-gray-500">
-              Selecciona los materiales del proveedor.
-            </p>
-          </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST"></form>
-          </div>
-        </div>
-      </div>
-      <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Servicios
-            </h3>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              Selecciona los servicios del proveedor.
-            </p>
-          </div>
-          <div class="mt-5 md:mt-0 md:col-span-2">
-            <form action="#" method="POST"></form>
-          </div>
-        </div>
-      </div>
-      <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-          <div class="md:col-span-1">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">
-              Trabajadores
-            </h3>
-            <p class="mt-1 text-sm leading-5 text-gray-500">
-              Añade trabajadores a cargo del proveedor.
+              Añade los contactos del cliente.
             </p>
           </div>
           <div class="mt-5 md:mt-0 md:col-span-2">
@@ -270,4 +239,4 @@ const ProvidersNew = () => {
   )
 }
 
-export default ProvidersNew
+export default CustomersNew

@@ -8,5 +8,6 @@ export const ENTITY_FRAGMENT = gql`
     email
     phone
     city
+    website
   }
 `
