@@ -8,6 +8,7 @@ import {
 import Layout from 'components/Layout'
 import Providers from 'views/providers'
 import Customers from 'views/customers'
+import ProvidersNew from 'views/providers-new'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <Redirect exact from="/" to="/providers" />
           <Route exact path="/providers">
             <Providers />
+          </Route>
+          <Route exact path="/providers/new">
+            <ProvidersNew />
           </Route>
           <Route exact path="/customers">
             <Customers />
