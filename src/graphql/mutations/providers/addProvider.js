@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
+import { useNotifications } from 'context/notifications'
 export const ADD_PROVIDER = gql`
   mutation addProvider($objects: [provider_insert_input!]!) {
     insert_provider(objects: $objects) {
@@ -13,8 +14,12 @@ export const ADD_PROVIDER = gql`
 
 export const useAddProvider = () => {
   const { push } = useHistory()
+  const { setMessage } = useNotifications()
   let [mutate, { data, loading, error }] = useMutation(ADD_PROVIDER, {
-    onCompleted: () => push('/providers'),
+    onCompleted: () => {
+      setMessage('Proveedor creado correctamente')
+      push('/providers')
+    },
     onError: () => push('/providers'),
   })
   return {

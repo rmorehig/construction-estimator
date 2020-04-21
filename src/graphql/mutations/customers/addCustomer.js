@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
+import { useNotifications } from 'context/notifications'
 export const ADD_CUSTOMER = gql`
   mutation addCustomer($objects: [customer_insert_input!]!) {
     insert_customer(objects: $objects) {
@@ -13,8 +14,12 @@ export const ADD_CUSTOMER = gql`
 
 export const useAddCustomer = () => {
   const { push } = useHistory()
+  const { setMessage } = useNotifications()
   let [mutate, { data, loading, error }] = useMutation(ADD_CUSTOMER, {
-    onCompleted: () => push('/customers'),
+    onCompleted: () => {
+      setMessage('Cliente creado correctamente')
+      push('/customers')
+    },
     onError: () => push('/customers'),
   })
   return {

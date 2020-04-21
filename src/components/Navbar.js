@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from 'assets/workflow-mark-on-dark.svg'
 import NavbarItem from './NavbarItem'
@@ -28,6 +28,21 @@ const routes = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef()
+
+  const handleClick = event => {
+    if (menuRef.current.contains(event.target)) {
+      return
+    }
+    setMenuOpen(false)
+  }
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick)
+    return () => {
+      document.removeEventListener('mousedown', handleClick)
+    }
+  }, [])
+
   return (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +79,7 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
-              <div className="ml-3 relative">
+              <div className="ml-3 relative" ref={menuRef}>
                 <div>
                   <button
                     className="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
