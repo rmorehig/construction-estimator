@@ -2,21 +2,22 @@ import React from 'react'
 import View from 'components/view'
 import { useFormik } from 'formik'
 import { useAddCustomer } from 'graphql/mutations/customers/addCustomer'
-import Notification from 'components/notification'
-const Action = ({ onClick = () => {} }) => (
-  <span class="inline-flex rounded-md shadow-sm">
-    <button
-      type="button"
-      class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700"
-      onClick={onClick}
-    >
-      Guardar
-    </button>
-  </span>
-)
+import Button from 'components/button'
+import Input from 'components/input'
+import Select from 'components/select'
+import Textarea from 'components/textarea'
+import * as Yup from 'yup'
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Introduce el nombre del cliente'),
+  email: Yup.string().email(
+    'Introduce un email con formato válido: you@example.com'
+  ),
+})
+
 const CustomersNew = () => {
   const { addCustomer } = useAddCustomer()
-  const { values, handleChange, handleSubmit } = useFormik({
+  const { values, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
       code: '',
@@ -29,10 +30,14 @@ const CustomersNew = () => {
       province: '',
       country: '',
     },
+    validationSchema,
     onSubmit: values => addCustomer(values),
   })
   return (
-    <View title="Nuevo cliente" action={<Action onClick={handleSubmit} />}>
+    <View
+      title="Nuevo cliente"
+      actions={<Button onClick={handleSubmit}>Guardar</Button>}
+    >
       <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
         <div class="md:grid md:grid-cols-3 md:gap-6">
           <div class="md:col-span-1">
@@ -45,177 +50,111 @@ const CustomersNew = () => {
             <form onSubmit={handleSubmit}>
               <div class="grid grid-cols-6 gap-6">
                 <div class="col-span-6">
-                  <label
-                    for="name"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Nombre
-                  </label>
-                  <input
+                  <Input
                     id="name"
+                    label="Nombre"
                     value={values.name}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    error={errors.name}
+                  />
+                </div>
+                <div class="col-span-6">
+                  <Input
+                    id="phone"
+                    label="Teléfono"
+                    value={values.phone}
+                    onChange={handleChange}
+                    error={errors.phone}
+                  />
+                </div>
+                <div class="col-span-6">
+                  <Input
+                    label="Email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    error={errors.email}
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div class="col-span-6">
+                  <Input
+                    label="Código"
+                    id="code"
+                    value={values.code}
+                    onChange={handleChange}
+                    error={errors.code}
                   />
                 </div>
 
                 <div class="col-span-6">
-                  <label
-                    for="code"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Código
-                  </label>
-                  <input
-                    id="code"
-                    value={values.code}
+                  <Input
+                    label="Web"
+                    id="website"
+                    value={values.website}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                  />
-                </div>
-                <div class="col-span-6">
-                  <label
-                    for="phone"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Teléfono
-                  </label>
-                  <div class="mt-1 flex rounded-md shadow-sm">
-                    <input
-                      id="phone"
-                      class="form-input flex-1 block w-full rounded-none rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                    />
-                  </div>
-                </div>
-                <div class="col-span-6">
-                  <label
-                    for="website"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Web
-                  </label>
-                  <div class="mt-1 flex rounded-md shadow-sm">
-                    <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                      http://
-                    </span>
-                    <input
-                      id="website"
-                      value={values.website}
-                      onChange={handleChange}
-                      class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                      placeholder="www.example.com"
-                    />
-                  </div>
-                </div>
-                <div class="col-span-6">
-                  <label
-                    for="email"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    placeholder="you@example.com"
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    error={errors.website}
+                    placeholder="www.example.com"
                   />
                 </div>
 
                 <div class="col-span-6 lg:col-span-4">
-                  <label
-                    for="address"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Dirección
-                  </label>
-                  <input
+                  <Input
+                    label="Dirección"
                     id="address"
                     value={values.address}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    error={errors.address}
                   />
                 </div>
                 <div class="col-span-6 lg:col-span-2">
-                  <label
-                    for="postal_code"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Código postal
-                  </label>
-                  <input
+                  <Input
+                    label="Código postal"
                     id="postal_code"
                     value={values.postal_code}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                    error={errors.postal_code}
                   />
                 </div>
                 <div class="col-span-6 lg:col-span-2">
-                  <label
-                    for="city"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Población
-                  </label>
-                  <input
+                  <Input
                     id="city"
+                    label="Ciudad"
                     value={values.city}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   />
                 </div>
-
                 <div class="col-span-6 lg:col-span-2">
-                  <label
-                    for="state"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    Provincia
-                  </label>
-                  <input
+                  <Input
                     id="province"
+                    label="Provincia"
                     value={values.province}
                     onChange={handleChange}
-                    class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   />
                 </div>
                 <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                  <label
-                    for="country"
-                    class="block text-sm font-medium leading-5 text-gray-700"
-                  >
-                    País
-                  </label>
-                  <select
+                  <Select
                     id="country"
+                    label="País"
                     value={values.country}
                     onChange={handleChange}
-                    class="mt-1 block form-select w-full py-2 px-3 py-0 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                   >
                     <option>España</option>
                     <option>Estados Unidos</option>
                     <option>Francia</option>
-                  </select>
+                  </Select>
                 </div>
               </div>
 
               <div class="mt-6">
-                <label
-                  for="observations"
-                  class="block text-sm leading-5 font-medium text-gray-700"
-                >
-                  Observaciones
-                </label>
-                <div class="rounded-md shadow-sm">
-                  <textarea
-                    id="observations"
-                    value={values.observations}
-                    onChange={handleChange}
-                    rows="3"
-                    class="form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-                  ></textarea>
-                </div>
+                <Textarea
+                  id="observations"
+                  label="Observaciones"
+                  value={values.observations}
+                  onChange={handleChange}
+                  rows="3"
+                  class="form-textarea mt-1 block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                />
               </div>
             </form>
           </div>
