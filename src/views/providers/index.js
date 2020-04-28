@@ -1,25 +1,36 @@
-import React from 'react'
-import ProvidersList from './list'
-import View from 'components/view'
-import { useHistory } from 'react-router-dom'
-import { useNotifications } from 'context/notifications'
-import Notification from 'components/notification'
-import Button from 'components/button'
+import React from 'react';
+import styled from 'styled-components';
+import { useGetProviders } from 'graphql/queries/providers/getProviders';
+import Overview from './Overview';
+import List from './List';
+
+const Wrapper = styled.div`
+  background: ${({ theme }) => theme.colors.background};
+  position: relative;
+  display: grid;
+  grid-template-columns: 400px auto;
+  overflow-y: hidden;
+`;
 
 const Providers = () => {
-  const { push } = useHistory()
-  const { showNotifications, message, hideNotifications } = useNotifications()
-  return (
-    <View
-      title="Proveedores"
-      actions={<Button onClick={() => push('/providers/new')}>Nuevo</Button>}
-    >
-      <ProvidersList />
-      {showNotifications && (
-        <Notification message={message} onClose={hideNotifications} />
-      )}
-    </View>
-  )
-}
+  const {
+    providers,
+    loading,
+    count,
+    nextPage,
+    previousPage,
+    filters,
+    updateFilters,
+    hasPrevious,
+    hasNext
+  } = useGetProviders();
 
-export default Providers
+  return (
+    <Wrapper>
+      <Overview />
+      <List />
+    </Wrapper>
+  );
+};
+
+export default Providers;

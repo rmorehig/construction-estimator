@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import {
-  RiUserAddLine as NewProviderIcon,
-  RiMoreLine as MoreIcon
-} from 'react-icons/ri';
+import { RiMoreLine as MoreIcon } from 'react-icons/ri';
 import {
   DetailsContent,
   DetailsTitle,
@@ -17,9 +14,9 @@ import {
   TableRow,
   Tag
 } from './styles';
-import { useGetProviders } from 'graphql/queries/providers/getProviders';
 import { getInitials } from 'utils/helpers';
 import Button from 'components/Button';
+import { useGetCustomers } from 'graphql/queries/customers/getCustomers';
 
 export const Page = styled.button`
   border-radius: 8px;
@@ -36,11 +33,6 @@ export const Page = styled.button`
   }
 `;
 
-const Pages = styled.div`
-  button {
-    margin-right: 20px;
-  }
-`;
 const TablePagination = styled.div`
   flex: 1;
   display: flex;
@@ -76,13 +68,9 @@ const Avatar = styled.div`
   background: ${(props) => props.theme.colors.blue.light};
   border-radius: 6px;
 `;
-
-const ListWrapper = styled.div`
-  padding: 0 26px 26px;
-`;
-const List = () => {
+const CustomersList = () => {
   const {
-    providers,
+    customers,
     loading,
     count,
     nextPage,
@@ -91,11 +79,11 @@ const List = () => {
     updateFilters,
     hasPrevious,
     hasNext
-  } = useGetProviders();
+  } = useGetCustomers();
 
   return (
-    <ListWrapper>
-      <DetailsTitle>Proveedores</DetailsTitle>
+    <>
+      <DetailsTitle>Entidades</DetailsTitle>
       <DetailsContent>
         <Header>
           <div>
@@ -127,7 +115,7 @@ const List = () => {
             </div>
           </TableHeader>
           <TableBody>
-            {providers.map(({ id, entity: { name, email, phone, city } }) => (
+            {customers.map(({ id, entity: { name, email, phone, city } }) => (
               <TableRow key={id}>
                 <Name>
                   <div>
@@ -159,8 +147,8 @@ const List = () => {
           </Button>
         </TablePagination>
       </DetailsContent>
-    </ListWrapper>
+    </>
   );
 };
 
-export default List;
+export default CustomersList;

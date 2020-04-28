@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import Layout from 'components/Layout';
 import { NotificationsProvider } from 'context/notifications';
-import ProvidersList from 'views/ProvidersList';
+import Providers from 'views/Providers';
+import CustomersList from 'views/CustomersList';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 
@@ -20,7 +21,10 @@ function App() {
             <Switch>
               <Redirect exact from="/" to="/providers" />
               <Route exact path="/providers">
-                <ProvidersList />
+                <Providers />
+              </Route>
+              <Route exact path="/customers">
+                <CustomersList />
               </Route>
             </Switch>
           </Layout>

@@ -25,7 +25,8 @@ export default {
       main: '#FACA15',
       dark: '#C27803'
     },
-    white: '#ffffff'
+    white: '#ffffff',
+    background: '#F5F5FA'
   },
   fonts: ['sans-serif', 'Roboto'],
   fontSizes: {

@@ -2,10 +2,10 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
 import { ENTITY_FRAGMENT } from 'graphql/fragments/entity';
-import useFilters from 'hooks/usePagination';
+import usePagination from 'hooks/usePagination';
 
-export const GET_CUSTOMERS = gql`
-  query getCustomers(
+export const GET_ENTITIES = gql`
+  query getEntities(
     $limit: Int
     $offset: Int
     $name: String
@@ -15,7 +15,7 @@ export const GET_CUSTOMERS = gql`
     $city: String
     $country: String
   ) {
-    customer(
+    provider(
       limit: $limit
       offset: $offset
       where: {
@@ -34,7 +34,7 @@ export const GET_CUSTOMERS = gql`
         ...entityFields
       }
     }
-    customer_aggregate(
+    provider_aggregate(
       where: {
         entity: {
           name: { _ilike: $name }
@@ -54,7 +54,7 @@ export const GET_CUSTOMERS = gql`
   ${ENTITY_FRAGMENT}
 `;
 
-export const useGetCustomers = () => {
+export const useGetProviders = () => {
   const {
     count,
     limit,
@@ -67,31 +67,31 @@ export const useGetCustomers = () => {
     updateFilters,
     hasNext,
     hasPrevious
-  } = useFilters({
+  } = usePagination({
     name: '',
     code: '',
     email: '',
     city: '',
     phone: ''
   });
-  const [customers, setCustomers] = useState([]);
-  const { loading, error } = useQuery(GET_CUSTOMERS, {
+  const [providers, setProviders] = useState([]);
+  const { loading } = useQuery(GET_PROVIDERS, {
     variables: {
       limit,
       offset,
       ...queryFilters
     },
     onCompleted: (data) => {
-      setCustomers(data.customer);
-      setCount(data.customer_aggregate.aggregate.count);
+      setProviders(data.provider);
+      setCount(data.provider_aggregate.aggregate.count);
     },
     fetchPolicy: 'cache-and-network'
   });
   return {
-    loading,
-    error,
-    customers,
+    providers,
     count,
+    limit,
+    loading,
     nextPage,
     previousPage,
     filters,
