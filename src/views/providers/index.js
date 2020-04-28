@@ -15,8 +15,11 @@ const Wrapper = styled.div`
 const Providers = () => {
   const {
     providers,
-    loading,
     count,
+    servicesCount,
+    materialsCount,
+    workersCount,
+    loading,
     nextPage,
     previousPage,
     filters,
@@ -27,7 +30,12 @@ const Providers = () => {
 
   return (
     <Wrapper>
-      <Overview />
+      <Overview
+        count={count}
+        servicesCount={servicesCount}
+        materialsCount={materialsCount}
+        workersCount={workersCount}
+      />
       <List />
     </Wrapper>
   );

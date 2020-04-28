@@ -43,7 +43,7 @@ const Company = styled.div`
   justify-content: center;
 `;
 
-const Overview = () => {
+const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
   const { colors } = useTheme();
   return (
     <OverviewWrapper>
@@ -63,7 +63,7 @@ const Overview = () => {
           <ProviderItem color="gray">
             <div>
               <span>Total</span>
-              <span>652</span>
+              <span>{count}</span>
             </div>
             <div>
               <button>
@@ -74,7 +74,7 @@ const Overview = () => {
           <ProviderItem color="yellow">
             <div>
               <span>Materiales</span>
-              <span>218</span>
+              <span>{materialsCount}</span>
             </div>
             <div>
               <button>
@@ -85,7 +85,7 @@ const Overview = () => {
           <ProviderItem color="red">
             <div>
               <span>Servicios</span>
-              <span>191</span>
+              <span>{servicesCount}</span>
             </div>
             <div>
               <button>
@@ -96,7 +96,7 @@ const Overview = () => {
           <ProviderItem color="blue">
             <div>
               <span>Trabajadores</span>
-              <span>76</span>
+              <span>{workersCount}</span>
             </div>
             <div>
               <button>

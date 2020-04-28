@@ -34,7 +34,7 @@ export const GET_PROVIDERS = gql`
         ...entityFields
       }
     }
-    provider_aggregate(
+    providersCount: provider_aggregate(
       where: {
         entity: {
           name: { _ilike: $name }
@@ -44,6 +44,57 @@ export const GET_PROVIDERS = gql`
           city: { _ilike: $city }
           country: { _ilike: $country }
         }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    materialsCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_materials: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    servicesCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_services: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    workersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_workers: {}
       }
     ) {
       aggregate {
@@ -75,6 +126,9 @@ export const useGetProviders = () => {
     phone: ''
   });
   const [providers, setProviders] = useState([]);
+  const [servicesCount, setServicesCount] = useState(0);
+  const [materialsCount, setMaterialsCount] = useState(0);
+  const [workersCount, setWorkersCount] = useState(0);
   const { loading } = useQuery(GET_PROVIDERS, {
     variables: {
       limit,
@@ -83,13 +137,19 @@ export const useGetProviders = () => {
     },
     onCompleted: (data) => {
       setProviders(data.provider);
-      setCount(data.provider_aggregate.aggregate.count);
+      setCount(data.providersCount.aggregate.count);
+      setServicesCount(data.servicesCount.aggregate.count);
+      setMaterialsCount(data.materialsCount.aggregate.count);
+      setWorkersCount(data.workersCount.aggregate.count);
     },
     fetchPolicy: 'cache-and-network'
   });
   return {
     providers,
     count,
+    servicesCount,
+    materialsCount,
+    workersCount,
     limit,
     loading,
     nextPage,
