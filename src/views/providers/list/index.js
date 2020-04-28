@@ -17,7 +17,6 @@ import {
   TableRow,
   Tag
 } from './styles';
-import { useGetProviders } from 'graphql/queries/providers/getProviders';
 import { getInitials } from 'utils/helpers';
 import Button from 'components/Button';
 
@@ -80,19 +79,17 @@ const Avatar = styled.div`
 const ListWrapper = styled.div`
   padding: 0 26px 26px;
 `;
-const List = () => {
-  const {
-    providers,
-    loading,
-    count,
-    nextPage,
-    previousPage,
-    filters,
-    updateFilters,
-    hasPrevious,
-    hasNext
-  } = useGetProviders();
-
+const List = ({
+  providers,
+  loading,
+  count,
+  nextPage,
+  previousPage,
+  filters,
+  updateFilters,
+  hasPrevious,
+  hasNext
+}) => {
   return (
     <ListWrapper>
       <DetailsTitle>Proveedores</DetailsTitle>

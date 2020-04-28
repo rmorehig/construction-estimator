@@ -105,7 +105,318 @@ export const GET_PROVIDERS = gql`
   ${ENTITY_FRAGMENT}
 `;
 
-export const useGetProviders = () => {
+export const GET_MATERIALS = gql`
+  query getProviders(
+    $limit: Int
+    $offset: Int
+    $name: String
+    $code: String
+    $email: String
+    $phone: String
+    $city: String
+    $country: String
+  ) {
+    provider(
+      limit: $limit
+      offset: $offset
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_materials: {}
+      }
+    ) {
+      id
+      entity {
+        ...entityFields
+      }
+    }
+    providersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    materialsCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_materials: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    servicesCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_services: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    workersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_workers: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${ENTITY_FRAGMENT}
+`;
+
+export const GET_SERVICES = gql`
+  query getProviders(
+    $limit: Int
+    $offset: Int
+    $name: String
+    $code: String
+    $email: String
+    $phone: String
+    $city: String
+    $country: String
+  ) {
+    provider(
+      limit: $limit
+      offset: $offset
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_services: {}
+      }
+    ) {
+      id
+      entity {
+        ...entityFields
+      }
+    }
+    providersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    materialsCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_materials: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    servicesCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_services: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    workersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_workers: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${ENTITY_FRAGMENT}
+`;
+export const GET_WORKERS = gql`
+  query getProviders(
+    $limit: Int
+    $offset: Int
+    $name: String
+    $code: String
+    $email: String
+    $phone: String
+    $city: String
+    $country: String
+  ) {
+    provider(
+      limit: $limit
+      offset: $offset
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_workers: {}
+      }
+    ) {
+      id
+      entity {
+        ...entityFields
+      }
+    }
+    providersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    materialsCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_materials: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    servicesCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_services: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    workersCount: provider_aggregate(
+      where: {
+        entity: {
+          name: { _ilike: $name }
+          code: { _ilike: $code }
+          email: { _ilike: $email }
+          phone: { _ilike: $phone }
+          city: { _ilike: $city }
+          country: { _ilike: $country }
+        }
+        provider_workers: {}
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+  ${ENTITY_FRAGMENT}
+`;
+
+const queries = {
+  providers: GET_PROVIDERS,
+  materials: GET_MATERIALS,
+  services: GET_SERVICES,
+  workers: GET_WORKERS
+};
+export const useGetProviders = ({ type = '' }) => {
   const {
     count,
     limit,
@@ -129,7 +440,7 @@ export const useGetProviders = () => {
   const [servicesCount, setServicesCount] = useState(0);
   const [materialsCount, setMaterialsCount] = useState(0);
   const [workersCount, setWorkersCount] = useState(0);
-  const { loading } = useQuery(GET_PROVIDERS, {
+  const { loading } = useQuery(queries[type || 'providers'], {
     variables: {
       limit,
       offset,

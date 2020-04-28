@@ -43,7 +43,13 @@ const Company = styled.div`
   justify-content: center;
 `;
 
-const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
+const Overview = ({
+  count,
+  servicesCount,
+  materialsCount,
+  workersCount,
+  setType
+}) => {
   const { colors } = useTheme();
   return (
     <OverviewWrapper>
@@ -60,7 +66,12 @@ const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
         <Title>Resumen</Title>
         <Subtitle>Proveedores disponibles</Subtitle>
         <Providers>
-          <ProviderItem color="gray">
+          <ProviderItem
+            color="gray"
+            onClick={() => {
+              setType('providers');
+            }}
+          >
             <div>
               <span>Total</span>
               <span>{count}</span>
@@ -71,7 +82,12 @@ const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
               </button>
             </div>
           </ProviderItem>
-          <ProviderItem color="yellow">
+          <ProviderItem
+            color="yellow"
+            onClick={() => {
+              setType('materials');
+            }}
+          >
             <div>
               <span>Materiales</span>
               <span>{materialsCount}</span>
@@ -82,7 +98,12 @@ const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
               </button>
             </div>
           </ProviderItem>
-          <ProviderItem color="red">
+          <ProviderItem
+            color="red"
+            onClick={() => {
+              setType('services');
+            }}
+          >
             <div>
               <span>Servicios</span>
               <span>{servicesCount}</span>
@@ -93,7 +114,12 @@ const Overview = ({ count, servicesCount, materialsCount, workersCount }) => {
               </button>
             </div>
           </ProviderItem>
-          <ProviderItem color="blue">
+          <ProviderItem
+            color="blue"
+            onClick={() => {
+              setType('workers');
+            }}
+          >
             <div>
               <span>Trabajadores</span>
               <span>{workersCount}</span>

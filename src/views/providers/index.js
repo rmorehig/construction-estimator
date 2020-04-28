@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useGetProviders } from 'graphql/queries/providers/getProviders';
 import Overview from './Overview';
@@ -13,20 +13,15 @@ const Wrapper = styled.div`
 `;
 
 const Providers = () => {
+  const [type, setType] = useState('providers');
   const {
-    providers,
     count,
     servicesCount,
     materialsCount,
     workersCount,
-    loading,
-    nextPage,
-    previousPage,
-    filters,
     updateFilters,
-    hasPrevious,
-    hasNext
-  } = useGetProviders();
+    ...rest
+  } = useGetProviders({ type });
 
   return (
     <Wrapper>
@@ -35,8 +30,9 @@ const Providers = () => {
         servicesCount={servicesCount}
         materialsCount={materialsCount}
         workersCount={workersCount}
+        setType={setType}
       />
-      <List />
+      <List {...rest} />
     </Wrapper>
   );
 };
