@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Layout from 'components/Layout';
 import { NotificationsProvider } from 'context/notifications';
-import ProvidersList from 'views/Providers';
+import ProvidersList from 'views/ProvidersList';
 import CustomersList from 'views/CustomersList';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
