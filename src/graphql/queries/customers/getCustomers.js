@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 import { ENTITY_FRAGMENT } from 'graphql/fragments/entity'
-import usePagination from 'hooks/use-pagination'
+import useFilters from 'hooks/use-pagination'
 
 export const GET_CUSTOMERS = gql`
   query getCustomers(
@@ -67,7 +67,7 @@ export const useGetCustomers = () => {
     updateFilters,
     hasNext,
     hasPrevious,
-  } = usePagination({
+  } = useFilters({
     name: '',
     code: '',
     email: '',
@@ -75,7 +75,7 @@ export const useGetCustomers = () => {
     phone: '',
   })
   const [customers, setCustomers] = useState([])
-  const { loading } = useQuery(GET_CUSTOMERS, {
+  const { loading, error } = useQuery(GET_CUSTOMERS, {
     variables: {
       limit,
       offset,
@@ -88,9 +88,10 @@ export const useGetCustomers = () => {
     fetchPolicy: 'cache-and-network',
   })
   return {
+    loading,
+    error,
     customers,
     count,
-    loading,
     nextPage,
     previousPage,
     filters,

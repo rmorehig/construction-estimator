@@ -1,8 +1,8 @@
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
-import { ENTITY_FRAGMENT } from 'graphql/fragments/entity'
-import usePagination from 'hooks/use-pagination'
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { useState } from 'react';
+import { ENTITY_FRAGMENT } from 'graphql/fragments/entity';
+import usePagination from 'hooks/usePagination';
 
 export const GET_PROVIDERS = gql`
   query getProviders(
@@ -52,7 +52,7 @@ export const GET_PROVIDERS = gql`
     }
   }
   ${ENTITY_FRAGMENT}
-`
+`;
 
 export const useGetProviders = () => {
   const {
@@ -66,36 +66,37 @@ export const useGetProviders = () => {
     queryFilters,
     updateFilters,
     hasNext,
-    hasPrevious,
+    hasPrevious
   } = usePagination({
     name: '',
     code: '',
     email: '',
     city: '',
-    phone: '',
-  })
-  const [providers, setProviders] = useState([])
+    phone: ''
+  });
+  const [providers, setProviders] = useState([]);
   const { loading } = useQuery(GET_PROVIDERS, {
     variables: {
       limit,
       offset,
-      ...queryFilters,
+      ...queryFilters
     },
-    onCompleted: data => {
-      setProviders(data.provider)
-      setCount(data.provider_aggregate.aggregate.count)
+    onCompleted: (data) => {
+      setProviders(data.provider);
+      setCount(data.provider_aggregate.aggregate.count);
     },
-    fetchPolicy: 'cache-and-network',
-  })
+    fetchPolicy: 'cache-and-network'
+  });
   return {
     providers,
     count,
+    limit,
     loading,
     nextPage,
     previousPage,
     filters,
     updateFilters,
     hasNext,
-    hasPrevious,
-  }
-}
+    hasPrevious
+  };
+};
