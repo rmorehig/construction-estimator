@@ -2,7 +2,7 @@ export default {
   colors: {
     blue: {
       light: '#C3DDFD',
-      main: '#1C64F2',
+      main: '#5E81F4',
       dark: '#475EAB'
     },
     gray: {
