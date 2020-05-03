@@ -1,36 +1,22 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom';
-import Layout from 'components/Layout';
+import { Switch, Redirect } from 'react-router-dom';
 import { NotificationsProvider } from 'context/notifications';
-import ProvidersList from 'views/ProvidersList';
-import CustomersList from 'views/CustomersList';
-import { ThemeProvider } from 'styled-components';
-import theme from 'theme';
+import { PublicRoute } from 'routes/PublicRoute';
+import { PrivateRoute } from 'routes/PrivateRoute';
+import Entities from 'views/Entities';
+import EntityModal from 'views/EntityModal';
+import Login from 'views/Login';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <NotificationsProvider>
-        <Router>
-          <Layout>
-            <Switch>
-              <Redirect exact from="/" to="/providers" />
-              <Route exact path="/providers">
-                <ProvidersList />
-              </Route>
-              <Route exact path="/customers">
-                <CustomersList />
-              </Route>
-            </Switch>
-          </Layout>
-        </Router>
-      </NotificationsProvider>
-    </ThemeProvider>
+    <NotificationsProvider>
+      <Switch>
+        <PublicRoute exact path="/" component={Login} />
+        <PrivateRoute exact path="/entities" component={Entities} />
+        <PrivateRoute exact path="/entities/new" component={EntityModal} />
+        <Redirect to="/" />
+      </Switch>
+    </NotificationsProvider>
   );
 }
 

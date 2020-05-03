@@ -1,40 +1,53 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react';
+import Notification from 'components/Notification';
 
-const NotificationContext = React.createContext()
+const NotificationContext = React.createContext();
 
-const NotificationsProvider = props => {
-  const [showNotifications, setShowNotifications] = useState(false)
-  const [message, setMessage] = useState('')
+const NotificationsProvider = (props) => {
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (message) {
-      setShowNotifications(true)
+      setShowNotifications(true);
     }
     return () => {
-      setShowNotifications(false)
-    }
-  }, [message])
+      setShowNotifications(false);
+    };
+  }, [message]);
+
+  const hideNotifications = useCallback(() => {
+    setShowNotifications(false);
+  }, [setShowNotifications]);
 
   const value = React.useMemo(
     () => ({
       showNotifications,
       message,
       setMessage,
-      hideNotifications: () => setShowNotifications(false),
+      hideNotifications
     }),
-    [showNotifications, message, setMessage, setShowNotifications]
-  )
-  return <NotificationContext.Provider value={value} {...props} />
-}
+    [showNotifications, message, setMessage, hideNotifications]
+  );
+
+  return (
+    <NotificationContext.Provider value={value} {...props}>
+      {props.children}
+      {showNotifications && (
+        <Notification message={message} onClose={hideNotifications} />
+      )}
+    </NotificationContext.Provider>
+  );
+};
 
 function useNotifications() {
-  const context = React.useContext(NotificationContext)
+  const context = React.useContext(NotificationContext);
   if (context === undefined) {
     throw new Error(
       `useNotifications must be used within a NotificationsProvider`
-    )
+    );
   }
-  return context
+  return context;
 }
 
-export { NotificationsProvider, useNotifications }
+export { NotificationsProvider, useNotifications };
