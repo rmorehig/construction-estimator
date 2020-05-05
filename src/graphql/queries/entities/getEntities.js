@@ -2,245 +2,20 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ENTITY_FRAGMENT } from 'graphql/fragments/entity';
 import useFilters from 'hooks/useFilters';
+import { useState } from 'react';
 
 export const GET_ENTITIES = gql`
   query getEntities(
     $limit: Int
     $offset: Int
-    $name: String
-    $code: String
-    $email: String
-    $phone: String
-    $city: String
-    $country: String
-    $search: String
-    $sortName: order_by
-    $sortEmail: order_by
-    $sortPhone: order_by
-    $sortCity: order_by
+    $where: entity_bool_exp
+    $orderBy: [entity_order_by!]
   ) {
-    entities: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-      }
-    ) {
+    entity(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
       ...entityFields
     }
-    providers: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-      }
-    ) {
-      ...entityFields
-    }
-    materialProviders: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_materials: {} }
-      }
-    ) {
-      ...entityFields
-    }
-    serviceProviders: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_services: {} }
-      }
-    ) {
-      ...entityFields
-    }
-    workerProviders: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_workers: {} }
-      }
-    ) {
-      ...entityFields
-    }
-    customers: entity(
-      limit: $limit
-      offset: $offset
-      order_by: {
-        name: $sortName
-        email: $sortEmail
-        phone: $sortPhone
-        city: $sortCity
-      }
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        customer: {}
-      }
-    ) {
-      ...entityFields
-    }
-    entitiesCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        country: { _ilike: $country }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    providersCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: {}
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    materialProvidersCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_materials: {} }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    serviceProvidersCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_services: {} }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    workerProvidersCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        provider: { provider_workers: {} }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    customersCount: entity_aggregate(
-      where: {
-        _or: [
-          { name: { _ilike: $search } }
-          { code: { _ilike: $search } }
-          { email: { _ilike: $search } }
-          { phone: { _ilike: $search } }
-          { city: { _ilike: $search } }
-        ]
-        customer: {}
-      }
-    ) {
+
+    entity_aggregate(where: $where) {
       aggregate {
         count
       }
@@ -249,38 +24,57 @@ export const GET_ENTITIES = gql`
   ${ENTITY_FRAGMENT}
 `;
 
-export const useGetEntities = () => {
+export const useGetEntities = (type = {}) => {
+  const [data, setData] = useState([]);
   const {
+    count,
+    setCount,
     limit,
     offset,
     nextPage,
+    page,
     previousPage,
-    filters,
-    queryFilters,
-    updateFilters,
     hasNext,
     hasPrevious,
-    sort
-  } = {};
-  const { data, loading } = useQuery(GET_ENTITIES, {
+    where,
+    search,
+    handleSearch,
+    orderBy,
+    handleOrderBy
+  } = useFilters({
+    filters: ['name', 'email', 'city', 'phone'],
+    search: '',
+    orderBy: { name: 'asc' }
+  });
+
+  const { loading } = useQuery(GET_ENTITIES, {
     variables: {
       limit,
       offset,
-      ...sort,
-      ...queryFilters
+      where: { ...where, ...type },
+      orderBy
     },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (response) => {
+      setData(response.entity);
+      setCount(response.entity_aggregate.aggregate.count);
+    }
   });
 
   return {
     data,
+    count,
+    offset,
     limit,
+    page,
     loading,
     nextPage,
     previousPage,
-    filters,
-    updateFilters,
     hasNext,
-    hasPrevious
+    hasPrevious,
+    search,
+    handleSearch,
+    orderBy,
+    handleOrderBy
   };
 };

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import List from './List';
 import View from 'components/View';
 import { useGetEntities } from 'graphql/queries/entities/getEntities';
 import Tabs from 'components/Tabs';
 import Actions from './Actions';
 import { useTabs } from 'hooks/useTabs';
-import Filters from './Filters';
+import { types } from 'utils/entities';
 
 const tabs = [
   {
@@ -29,35 +29,49 @@ const tabs = [
     name: 'Clientes'
   }
 ];
-let index = 0;
+
 const Entities = () => {
-  console.log('holas', index++);
   const { currentTab, toggleTab } = useTabs('all');
   const {
     data,
+    count,
     loading,
-    filters,
-    updateFilters,
-    nextPage,
-    previousPage,
-    hasPrevious,
-    hasNext
-  } = useGetEntities();
+    search,
+    handleSearch,
+    ...pagination
+  } = useGetEntities(types[currentTab]);
+  const columns = [
+    {
+      id: 'name',
+      name: 'Nombre'
+    },
+    {
+      id: 'email',
+      name: 'Email'
+    },
+    {
+      id: 'phone',
+      name: 'Teléfono'
+    },
+    {
+      id: 'city',
+      name: 'Población'
+    }
+  ];
+
   return (
-    <View title="Entidades" actions={<Actions />}>
+    <View
+      title="Entidades"
+      actions={<Actions search={search} onSearch={handleSearch} />}
+    >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
-      <Filters filters={filters} updateFilters={updateFilters} />
-      {currentTab === 'all' && (
-        <List
-          data={data?.entities}
-          count={data?.entitiesCount?.aggregate.count}
-          loading={loading}
-          nextPage={nextPage}
-          previousPage={previousPage}
-          hasPrevious={hasPrevious}
-          hasNext={hasNext}
-        />
-      )}
+      <List
+        data={data}
+        columns={columns}
+        count={count}
+        loading={loading}
+        {...pagination}
+      />
     </View>
   );
 };

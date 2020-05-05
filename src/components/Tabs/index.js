@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tabs = ({ value, tabs = [], onChange = () => {} }) => {
   return (
-    <div className="mb-4">
+    <div className="mb-6">
       <div className="sm:hidden">
         <select
           aria-label="Selected tab"
@@ -21,9 +21,9 @@ const Tabs = ({ value, tabs = [], onChange = () => {} }) => {
             {tabs.map(({ id, name }) => (
               <button
                 key={id}
-                className={`whitespace-no-wrap mr-8 py-4 px-1 border-b-2 border-transparent font-medium text-sm leading-5 focus:outline-none ${
+                className={`whitespace-no-wrap mr-8 py-3 px-1 border-b-2 border-transparent font-medium text-sm leading-5 focus:outline-none ${
                   id === value
-                    ? 'border-indigo-500 text-indigo-600'
+                    ? 'border-blue-500 text-blue-600'
                     : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
                 onClick={() => onChange(id)}

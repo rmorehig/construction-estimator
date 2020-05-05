@@ -5,13 +5,13 @@ const Input = React.forwardRef((props, ref) => {
     <div>
       {props.label && (
         <label
-          for={props.id}
+          htmlFor={props.id}
           className="block text-sm font-medium leading-5 text-gray-700"
         >
           {props.label}
         </label>
       )}
-      <div class="mt-1 flex rounded-md shadow-sm">
+      <div className="mt-1 flex rounded-md shadow-sm">
         {props.id === 'website' && (
           <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
             http://

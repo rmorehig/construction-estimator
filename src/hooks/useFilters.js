@@ -1,14 +1,48 @@
 import { useReducer, useEffect } from 'react';
 
+const wordToFilters = (word, filters) => {
+  return filters.map((filter) => ({
+    [filter]: { _ilike: '%' + word + '%' }
+  }));
+};
+
+const createPattern = (word, filters) => {
+  const pattern = { _or: wordToFilters(word, filters), _and: {} };
+  return pattern;
+};
+
+export const parseWhere = ({ search, filters }) => {
+  const where = { _and: {} };
+  const searchArray = search?.split(' ');
+  let lastNode;
+  searchArray.forEach((word) => {
+    const newNode = createPattern(word, filters);
+    if (!lastNode) {
+      lastNode = newNode;
+    } else {
+      newNode._and = lastNode;
+      lastNode = newNode;
+    }
+  });
+  where._and = lastNode;
+  return where;
+};
+
+const changeOrder = (order = 'asc') => {
+  return order === 'asc' ? 'desc' : 'asc';
+};
 const initialValues = {
+  count: 0,
   limit: 10,
   offset: 0,
-  count: 0,
-  filters: {},
-  queryFilters: {},
+  page: 1,
   hasNext: false,
   hasPrevious: false,
-  sort: {}
+  search: '',
+  filters: [],
+  where: {},
+  sort: {},
+  orderBy: {}
 };
 
 const reducer = (state, { type, payload }) => {
@@ -20,100 +54,100 @@ const reducer = (state, { type, payload }) => {
     case 'SET_COUNT':
       return { ...state, count: payload };
     case 'PREVIOUS_PAGE':
-      return { ...state, offset: state.offset - state.limit };
+      return {
+        ...state,
+        offset: state.offset > 0 ? state.offset - state.limit : state.offset,
+        page: state.offset > 0 ? state.page - 1 : state.page
+      };
     case 'NEXT_PAGE':
-      return { ...state, offset: state.limit + state.offset };
+      return {
+        ...state,
+        offset:
+          state.offset + state.limit < state.count
+            ? state.limit + state.offset
+            : state.offset,
+        page:
+          state.offset + state.limit < state.count ? state.page + 1 : state.page
+      };
     case 'RESET_PAGINATION':
       return { ...initialValues };
-    case 'UPDATE_FILTERS':
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          ...payload
-        }
-      };
-    case 'UPDATE_QUERY_FILTERS':
-      return {
-        ...state,
-        queryFilters: payload
-      };
     case 'SET_NEXT':
       return { ...state, hasNext: payload };
     case 'SET_PREVIOUS':
       return { ...state, hasPrevious: payload };
-    case 'UPDATE_SORT':
+    case 'SET_SEARCH':
       return {
         ...state,
-        sort: {
-          ...state.sort,
-          ...payload
+        search: payload
+      };
+    case 'UPDATE_WHERE':
+      return {
+        ...state,
+        where: payload
+      };
+    case 'SET_ORDER_BY':
+      return {
+        ...state,
+        orderBy: {
+          [payload]: Object.keys(state.orderBy).includes(payload)
+            ? changeOrder(state.orderBy[payload])
+            : 'asc'
         }
       };
+
     default:
       return state;
   }
 };
 
-export const useFilters = (initialFilters = {}) => {
+export const useFilters = (initialPattern = {}) => {
   const [
-    { limit, offset, count, filters, queryFilters, hasPrevious, hasNext },
+    { count, page, limit, offset, filters, search, where, orderBy },
     dispatch
   ] = useReducer(reducer, {
     ...initialValues,
-    filters: { ...initialFilters }
+    filters: initialPattern.filters,
+    where: parseWhere(initialPattern),
+    orderBy: initialPattern.orderBy
   });
-
-  const parseFilters = (filters = {}) => {
-    let queryFilters = {};
-    let properties = Object.getOwnPropertyNames(filters);
-    properties.forEach((property) => {
-      queryFilters = {
-        ...queryFilters,
-        [property]: filters[property]
-          ? '%' + filters[property] + '%'
-          : undefined
-      };
-    });
-    dispatch({ type: 'UPDATE_QUERY_FILTERS', payload: queryFilters });
-  };
-
   useEffect(() => {
-    const timeout = setTimeout(() => parseFilters(filters), 500);
+    const timeout = setTimeout(
+      () =>
+        dispatch({
+          type: 'UPDATE_WHERE',
+          payload: parseWhere({ search, filters })
+        }),
+      500
+    );
     return () => timeout && clearTimeout(timeout);
-  }, [filters]);
-
-  useEffect(() => {
-    dispatch({ type: 'SET_NEXT', payload: offset + limit < count });
-    dispatch({ type: 'SET_PREVIOUS', payload: offset > 0 });
-  }, [offset, count, limit]);
+  }, [search, filters]);
 
   const setLimit = (payload) => dispatch({ type: 'SET_LIMIT', payload });
   const setOffset = (payload) => dispatch({ type: 'SET_OFFSET', payload });
-  const previousPage = (payload) =>
-    dispatch({ type: 'PREVIOUS_PAGE', payload });
-  const nextPage = (payload) => dispatch({ type: 'NEXT_PAGE', payload });
   const setCount = (payload) => dispatch({ type: 'SET_COUNT', payload });
+  const previousPage = () => dispatch({ type: 'PREVIOUS_PAGE' });
+  const nextPage = () => dispatch({ type: 'NEXT_PAGE' });
   const resetPagination = () => dispatch({ type: 'RESET_PAGINATION' });
-  const updateFilters = (payload) =>
-    dispatch({ type: 'UPDATE_FILTERS', payload });
-  const upsdateSort = (payload) => dispatch({ type: 'UPDATE_SORT', payload });
+  const handleSearch = (payload) => dispatch({ type: 'SET_SEARCH', payload });
+  const handleOrderBy = (payload) =>
+    dispatch({ type: 'SET_ORDER_BY', payload });
 
   return {
+    count,
+    setCount,
+    page,
     limit,
     offset,
-    count,
-    filters,
-    queryFilters,
     setLimit,
     setOffset,
     previousPage,
     nextPage,
-    setCount,
     resetPagination,
-    updateFilters,
-    hasPrevious,
-    hasNext
+    where,
+    search,
+    handleSearch,
+    orderBy,
+    handleOrderBy
   };
 };
 

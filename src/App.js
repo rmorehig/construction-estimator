@@ -4,17 +4,27 @@ import { NotificationsProvider } from 'context/notifications';
 import { PublicRoute } from 'routes/PublicRoute';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import Entities from 'views/Entities';
-import EntityModal from 'views/EntityModal';
 import Login from 'views/Login';
+import ProviderModal from 'views/ProviderModal';
 
 function App() {
   return (
     <NotificationsProvider>
       <Switch>
         <PublicRoute exact path="/" component={Login} />
+        <PrivateRoute exact path="/dashboard" component={Entities} />
+        <PrivateRoute exact path="/resources" component={Entities} />
         <PrivateRoute exact path="/entities" component={Entities} />
-        <PrivateRoute exact path="/entities/new" component={EntityModal} />
-        <Redirect to="/" />
+        <PrivateRoute exact path="/calendar" component={Entities} />
+        <PrivateRoute exact path="/bids" component={Entities} />
+        <PrivateRoute exact path="/constructions" component={Entities} />
+        <PrivateRoute exact path="/team" component={Entities} />
+        <PrivateRoute
+          exact
+          path="/entities/providers/new"
+          component={ProviderModal}
+        />
+        <Redirect to="/dashboard" />
       </Switch>
     </NotificationsProvider>
   );

@@ -4,7 +4,7 @@ import { RiEqualizerLine as FilterIcon } from 'react-icons/ri';
 const Filters = ({ filters = {}, updateFilters = () => {} }) => {
   return (
     <div className="mb-4 flex items-center">
-      <div className="relative rounded-md shadow-sm w-1/4">
+      <div className="relative rounded-md shadow-sm w-full md:w-1/2 lg:w-1/4">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <SearchIcon className="text-gray-400" />
         </div>
