@@ -39,3 +39,51 @@ const Tabs = ({ value, tabs = [], onChange = () => {} }) => {
 };
 
 export default Tabs;
+
+/*
+const handleSteps = async (event, index) => {
+  event.preventDefault();
+  const errors = await validateForm();
+  if (isEmpty(errors)) {
+    setStep(index);
+  }
+};
+const { steps, currentStep, nextStep, previousStep, setStep } = useSteps([
+  '1. Detalles',
+  '2. Opcional'
+]);
+
+const handleNextStep = async (event) => {
+  event.preventDefault();
+  const errors = await validateForm();
+  if (isEmpty(errors)) {
+    nextStep();
+  }
+};
+
+const Steps = () => (
+  <div>
+    <div className="hidden sm:block">
+      <div className="border-b border-gray-200">
+        <nav className="-mb-px flex">
+          {steps.map((step, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`w-1/2 py-4 px-1 text-center border-b-2  font-medium text-sm leading-5 focus:outline-none ${
+                index === currentStep
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+              aria-current="step"
+              onClick={(event) => handleSteps(event, index)}
+            >
+              {step}
+            </button>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </div>
+);
+*/

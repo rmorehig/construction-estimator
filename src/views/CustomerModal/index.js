@@ -6,28 +6,21 @@ import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
 import Modal from 'components/Modal';
-import { useAddProvider } from 'graphql/mutations/providers/addProvider';
+import { useAddCustomer } from 'graphql/mutations/customers/addCustomer';
 import { GridContainer, GridItem } from 'components/Grid';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Introduce el nombre del proveedor'),
+  name: Yup.string().required('Introduce el nombre del cliente'),
   email: Yup.string().email(
     'Introduce un email con formato válido: usuario@correo.com'
   )
 });
 
-const ProviderModal = () => {
-  const { addProvider } = useAddProvider();
+const CustomerModal = () => {
+  const { addCustomer } = useAddCustomer();
   const history = useHistory();
 
-  const {
-    values,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    errors,
-    validateForm
-  } = useFormik({
+  const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
       code: '',
@@ -38,13 +31,12 @@ const ProviderModal = () => {
       postal_code: '',
       city: '',
       province: '',
-      country: '',
-      type: ''
+      country: ''
     },
     validateOnMount: false,
     validationSchema,
     onSubmit: (values) => {
-      addProvider(values);
+      addCustomer(values);
     }
   });
 
@@ -53,7 +45,7 @@ const ProviderModal = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            Nuevo proveedor
+            Nuevo cliente
           </h3>
 
           <button
@@ -210,4 +202,4 @@ const ProviderModal = () => {
   );
 };
 
-export default ProviderModal;
+export default CustomerModal;

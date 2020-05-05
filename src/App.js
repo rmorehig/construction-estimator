@@ -6,6 +6,7 @@ import { PrivateRoute } from 'routes/PrivateRoute';
 import Entities from 'views/Entities';
 import Login from 'views/Login';
 import ProviderModal from 'views/ProviderModal';
+import CustomerModal from 'views/CustomerModal';
 
 function App() {
   return (
@@ -23,6 +24,11 @@ function App() {
           exact
           path="/entities/providers/new"
           component={ProviderModal}
+        />
+        <PrivateRoute
+          exact
+          path="/entities/customers/new"
+          component={CustomerModal}
         />
         <Redirect to="/dashboard" />
       </Switch>
