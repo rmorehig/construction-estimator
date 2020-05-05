@@ -4,6 +4,7 @@ import Tabs from 'components/Tabs';
 import { useTabs } from 'hooks/useTabs';
 import { useGetProviderDetails } from 'graphql/queries/entities/getProviderDetails';
 import Spinner from 'components/Spinner';
+import Actions from './Actions';
 
 const tabs = [
   {
@@ -45,7 +46,7 @@ const ProviderDetails = () => {
     observations
   } = data;
   return (
-    <View title="Entidades">
+    <View title="Proveedor" actions={<Actions />}>
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:p-0">
