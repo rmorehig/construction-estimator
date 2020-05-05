@@ -121,7 +121,7 @@ const BidsIcon = () => (
 );
 const Sidebar = () => {
   return (
-    <div className="hidden md:flex md:flex-shrink-0 shadow-sm bg-gray-100 h-full">
+    <div className="hidden md:flex md:flex-shrink-0 shadow-sm bg-cool-gray-50 h-full">
       <div className="flex flex-col w-64 border-r border-gray-200">
         <div className="h-0 flex-1 flex flex-col px-4">
           <nav className="mt-5">

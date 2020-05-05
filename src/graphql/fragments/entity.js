@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const ENTITY_FRAGMENT = gql`
   fragment entityFields on entity {
@@ -9,5 +9,11 @@ export const ENTITY_FRAGMENT = gql`
     phone
     city
     website
+    observations
+    address
+    city
+    province
+    postal_code
+    country
   }
-`
+`;

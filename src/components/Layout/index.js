@@ -8,9 +8,9 @@ const Layout = ({ children }) => {
       <Header />
       <div class="flex-1 flex overflow-hidden">
         <Sidebar />
-        <div className="flex-1 z-0 pt-2 pb-6 focus:outline-none md:py-6 overflow-y-auto">
+        <main className="flex-1 z-0 pt-2 pb-6 focus:outline-none md:py-6 overflow-y-auto bg-cool-gray-100">
           {children}
-        </div>
+        </main>
       </div>
     </div>
   );

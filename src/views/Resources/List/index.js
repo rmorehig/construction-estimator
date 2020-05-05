@@ -1,6 +1,5 @@
 import React from 'react';
 import Spinner from 'components/Spinner';
-import { useHistory } from 'react-router-dom';
 
 const SortAscIcon = () => (
   <svg
@@ -44,7 +43,6 @@ const List = React.memo(
     orderBy,
     handleOrderBy
   }) => {
-    const history = useHistory();
     if (loading)
       return (
         <div className="flex flex-1 justify-center text-5xl overflow-hidden">
@@ -76,24 +74,20 @@ const List = React.memo(
             </tr>
           </thead>
           <tbody>
-            {data.map(({ id, name, phone, email, city }) => {
+            {data.map(({ id, name, model, manufacturer, material_type }) => {
               return (
-                <tr
-                  key={id}
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => history.push(`/entities/providers/${id}`)}
-                >
+                <tr key={id} className="cursor-pointer hover:bg-gray-100">
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-900">
                     {name}
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {email}
+                    {model}
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {phone}
+                    {manufacturer}
                   </td>
                   <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-                    {city}
+                    {material_type?.name}
                   </td>
                 </tr>
               );

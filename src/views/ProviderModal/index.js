@@ -6,7 +6,7 @@ import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
 import Modal from 'components/Modal';
-import { useAddProvider } from 'graphql/mutations/providers/addProvider';
+import { useAddProvider } from 'graphql/mutations/entities/addProvider';
 import { GridContainer, GridItem } from 'components/Grid';
 
 const validationSchema = Yup.object().shape({
@@ -20,14 +20,7 @@ const ProviderModal = () => {
   const { addProvider } = useAddProvider();
   const history = useHistory();
 
-  const {
-    values,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    errors,
-    validateForm
-  } = useFormik({
+  const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
       code: '',

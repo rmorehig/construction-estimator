@@ -6,7 +6,7 @@ import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
 import Modal from 'components/Modal';
-import { useAddCustomer } from 'graphql/mutations/customers/addCustomer';
+import { useAddCustomer } from 'graphql/mutations/entities/addCustomer';
 import { GridContainer, GridItem } from 'components/Grid';
 
 const validationSchema = Yup.object().shape({
