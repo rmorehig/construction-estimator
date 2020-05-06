@@ -49,9 +49,9 @@ const CustomerDetails = () => {
     country,
     observations,
     website
-  } = data;
+  } = data.entity;
   return (
-    <View title="Cliente" actions={<Actions data={data} />}>
+    <View title="Cliente" actions={<Actions data={data.entity} />}>
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
         <GridItem xs={4}>

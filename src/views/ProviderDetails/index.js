@@ -49,9 +49,9 @@ const ProviderDetails = () => {
     province,
     country,
     observations
-  } = data;
+  } = data.entity;
   return (
-    <View title="Proveedor" actions={<Actions data={data} />}>
+    <View title="Proveedor" actions={<Actions data={data.entity} />}>
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
         <GridItem xs={4}>

@@ -8,6 +8,7 @@ import Modal from 'components/Modal';
 import { useAddProvider } from 'graphql/mutations/entities/addProvider';
 import { GridContainer, GridItem } from 'components/Grid';
 import Button from 'components/Button';
+import { useUpdateProvider } from 'graphql/mutations/entities/updateProvider';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Introduce el nombre del proveedor'),
@@ -18,6 +19,7 @@ const validationSchema = Yup.object().shape({
 
 const ProviderModal = ({ handleClose, data }) => {
   const { addProvider } = useAddProvider();
+  const { updateProvider } = useUpdateProvider();
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
@@ -36,7 +38,12 @@ const ProviderModal = ({ handleClose, data }) => {
     validateOnMount: false,
     validationSchema,
     onSubmit: (values) => {
-      addProvider(values);
+      if (data) {
+        updateProvider(values);
+      } else {
+        addProvider(values);
+      }
+      handleClose();
     }
   });
 

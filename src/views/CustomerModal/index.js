@@ -8,6 +8,7 @@ import Modal from 'components/Modal';
 import { useAddCustomer } from 'graphql/mutations/entities/addCustomer';
 import { GridContainer, GridItem } from 'components/Grid';
 import Button from 'components/Button';
+import { useUpdateCustomer } from 'graphql/mutations/entities/updateCustomer';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Introduce el nombre del cliente'),
@@ -18,6 +19,7 @@ const validationSchema = Yup.object().shape({
 
 const CustomerModal = ({ handleClose, data }) => {
   const { addCustomer } = useAddCustomer();
+  const { updateCustomer } = useUpdateCustomer();
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
@@ -35,7 +37,12 @@ const CustomerModal = ({ handleClose, data }) => {
     validateOnMount: false,
     validationSchema,
     onSubmit: (values) => {
-      addCustomer(values);
+      if (data) {
+        updateCustomer(values);
+      } else {
+        addCustomer(values);
+      }
+      handleClose();
     }
   });
 

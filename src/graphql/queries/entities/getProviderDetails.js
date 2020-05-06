@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 export const GET_PROVIDER_DETAILS = gql`
   query getProviderDetails($id: Int!) {
-    entity_by_pk(id: $id) {
+    entity: entity_by_pk(id: $id) {
       ...entityFields
     }
   }
@@ -14,16 +14,12 @@ export const GET_PROVIDER_DETAILS = gql`
 `;
 
 export const useGetProviderDetails = () => {
-  const [data, setData] = useState({});
   const { id } = useParams();
-  const { loading } = useQuery(GET_PROVIDER_DETAILS, {
+  const { data, loading } = useQuery(GET_PROVIDER_DETAILS, {
     variables: {
       id
     },
-    fetchPolicy: 'cache-and-network',
-    onCompleted: (response) => {
-      setData(response.entity_by_pk);
-    }
+    fetchPolicy: 'cache-and-network'
   });
 
   return {

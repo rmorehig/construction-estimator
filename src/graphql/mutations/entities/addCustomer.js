@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
-import { useHistory } from 'react-router-dom'
-import { useNotifications } from 'context/notifications'
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
+import { useNotifications } from 'context/notifications';
 export const ADD_CUSTOMER = gql`
   mutation addCustomer($objects: [customer_insert_input!]!) {
     insert_customer(objects: $objects) {
@@ -10,18 +10,18 @@ export const ADD_CUSTOMER = gql`
       }
     }
   }
-`
+`;
 
 export const useAddCustomer = () => {
-  const { push } = useHistory()
-  const { setMessage } = useNotifications()
+  const { push } = useHistory();
+  const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(ADD_CUSTOMER, {
     onCompleted: () => {
-      setMessage('Cliente creado correctamente')
-      push('/customers')
+      setMessage('Cliente creado correctamente');
+      push('/entities');
     },
-    onError: () => push('/customers'),
-  })
+    onError: () => push('/entities')
+  });
   return {
     addCustomer: ({
       name,
@@ -33,7 +33,7 @@ export const useAddCustomer = () => {
       postal_code,
       city,
       province,
-      country,
+      country
     }) =>
       mutate({
         variables: {
@@ -49,14 +49,14 @@ export const useAddCustomer = () => {
                 postal_code,
                 city,
                 province,
-                country,
-              },
-            },
-          },
-        },
+                country
+              }
+            }
+          }
+        }
       }),
     data,
     error,
-    loading,
-  }
-}
+    loading
+  };
+};
