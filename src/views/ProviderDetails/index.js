@@ -5,6 +5,9 @@ import { useTabs } from 'hooks/useTabs';
 import { useGetProviderDetails } from 'graphql/queries/entities/getProviderDetails';
 import Spinner from 'components/Spinner';
 import Actions from './Actions';
+import { CardContent, Card, CardHeader } from 'components/Card';
+import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
+import { GridItem, GridContainer } from 'components/Grid';
 
 const tabs = [
   {
@@ -36,8 +39,10 @@ const ProviderDetails = () => {
     );
   const {
     name,
+    code,
     email,
     phone,
+    website,
     address,
     postal_code,
     city,
@@ -48,70 +53,38 @@ const ProviderDetails = () => {
   return (
     <View title="Proveedor" actions={<Actions data={data} />}>
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div className="px-4 py-5 sm:p-0">
-          <dl>
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Nombre
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {name}
-              </dd>
-            </div>
-            <div className="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Email
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {email}
-              </dd>
-            </div>
-            <div className="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Teléfono
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {phone}
-              </dd>
-            </div>
-            <div className="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Dirección
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {`${address || ''}, ${postal_code || ''}, ${city || ''} (${
-                  province || ''
-                }), ${country || ''}`}
-              </dd>
-            </div>
-            <div className="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Observaciones
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                {observations}
-              </dd>
-            </div>
-            <div className="mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5">
-              <dt className="text-sm leading-5 font-medium text-gray-500">
-                Contactos
-              </dt>
-              <dd className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                <ul className="border border-gray-200 rounded-md">
-                  <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-                    <div className="w-0 flex-1 flex items-center">
-                      <span className="ml-2 flex-1 w-0 truncate">
-                        Añade un nuevo contacto
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </div>
+      <GridContainer>
+        <GridItem xs={4}>
+          <Card>
+            <CardHeader title="Información" />
+            <CardContent noPadding>
+              <DescriptionList>
+                <DescriptionRow term="Nombre" description={name} noBorder />
+                <DescriptionRow term="DNI/CIF" description={code} />
+                <DescriptionRow term="Email" description={email} />
+                <DescriptionRow term="Teléfono" description={phone} />
+                <DescriptionRow
+                  term="Dirección"
+                  description={`${address || ''} ${postal_code || ''} ${
+                    city || ''
+                  } ${province || ''} ${country || ''}`}
+                />
+                <DescriptionRow term="Web" description={website} />
+                <DescriptionRow
+                  term="Observaciones"
+                  description={observations}
+                />
+              </DescriptionList>
+            </CardContent>
+          </Card>
+        </GridItem>
+        <GridItem xs={2}>
+          <Card>
+            <CardHeader title="Contactos" />
+            <CardContent>Aquí van contactos</CardContent>
+          </Card>
+        </GridItem>
+      </GridContainer>
     </View>
   );
 };

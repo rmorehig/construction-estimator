@@ -8,7 +8,6 @@ import Actions from './Actions';
 import { GridContainer, GridItem } from 'components/Grid';
 import { CardContent, Card, CardHeader } from 'components/Card';
 import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
-import Badge from 'components/Badge';
 
 const tabs = [
   {
@@ -66,9 +65,9 @@ const CustomerDetails = () => {
                 <DescriptionRow term="Teléfono" description={phone} />
                 <DescriptionRow
                   term="Dirección"
-                  description={`${address || ''}, ${postal_code || ''}, ${
+                  description={`${address || ''} ${postal_code || ''} ${
                     city || ''
-                  } (${province || ''}), ${country || ''}`}
+                  } ${province || ''} ${country || ''}`}
                 />
                 <DescriptionRow term="Web" description={website} />
                 <DescriptionRow
