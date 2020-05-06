@@ -68,7 +68,9 @@ const Entities = () => {
   } = useGetEntities(types[currentTab]);
 
   const handleClickRow = (row) => {
-    history.push(`/entities/providers/${row.id}`);
+    history.push(
+      `/entities/${row.provider ? 'providers' : 'customers'}/${row.id}`
+    );
   };
 
   return (
