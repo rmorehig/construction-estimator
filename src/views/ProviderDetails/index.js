@@ -46,7 +46,7 @@ const ProviderDetails = () => {
     observations
   } = data;
   return (
-    <View title="Proveedor" actions={<Actions />}>
+    <View title="Proveedor" actions={<Actions data={data} />}>
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:p-0">

@@ -8,10 +8,10 @@ import { useAddMaterial } from 'graphql/mutations/resources/addMaterial';
 import { GridContainer, GridItem } from 'components/Grid';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Introduce el nombre del material')
+  name: Yup.string().required('Introduce el nombre del servicio')
 });
 
-const MaterialModal = ({ handleClose, data }) => {
+const ServiceModal = ({ handleClose, data }) => {
   const { addMaterial } = useAddMaterial();
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
@@ -33,7 +33,7 @@ const MaterialModal = ({ handleClose, data }) => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            Nuevo material
+            Nuevo servicio
           </h3>
 
           <button
@@ -126,4 +126,4 @@ const MaterialModal = ({ handleClose, data }) => {
   );
 };
 
-export default MaterialModal;
+export default ServiceModal;

@@ -2,8 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useDropdown from 'hooks/useDropdown';
 import { GoSearch as SearchIcon } from 'react-icons/go';
+import { useModal } from 'context/modals';
+import ProviderModal from 'views/ProviderModal';
+import CustomerModal from 'views/CustomerModal';
 const Actions = ({ search, onSearch = () => {} }) => {
-  const [containerRef, isOpen, open] = useDropdown();
+  const [containerRef, isOpen, openDropdown] = useDropdown();
+  const { openModal } = useModal();
   return (
     <div className="flex items-center">
       <div className="w-full">
@@ -25,7 +29,7 @@ const Actions = ({ search, onSearch = () => {} }) => {
             <button
               type="button"
               className="relative inline-flex items-center px-3 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue focus:border-blue-600 active:bg-blue-600 transition duration-150 ease-in-out"
-              onClick={open}
+              onClick={openDropdown}
             >
               <svg
                 className="mr-1 -mx-1 h-5 w-5"
@@ -46,18 +50,18 @@ const Actions = ({ search, onSearch = () => {} }) => {
         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50">
           {isOpen && (
             <div className="py-1 rounded-md bg-white shadow-xs">
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/entities/providers/new"
+              <button
+                className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                onClick={() => openModal(<ProviderModal />)}
               >
                 Proveedor
-              </Link>
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/entities/customers/new"
+              </button>
+              <button
+                className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                onClick={() => openModal(<CustomerModal />)}
               >
                 Cliente
-              </Link>
+              </button>
             </div>
           )}
         </div>

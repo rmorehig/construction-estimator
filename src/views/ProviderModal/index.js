@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router-dom';
 import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
@@ -16,10 +15,8 @@ const validationSchema = Yup.object().shape({
   )
 });
 
-const ProviderModal = () => {
+const ProviderModal = ({ handleClose, data }) => {
   const { addProvider } = useAddProvider();
-  const history = useHistory();
-
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       name: '',
@@ -32,7 +29,8 @@ const ProviderModal = () => {
       city: '',
       province: '',
       country: '',
-      type: ''
+      type: '',
+      ...data
     },
     validateOnMount: false,
     validationSchema,
@@ -52,7 +50,7 @@ const ProviderModal = () => {
           <button
             type="button"
             class="text-white hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150"
-            onClick={() => history.push('/entities')}
+            onClick={handleClose}
           >
             <svg
               class="h-6 w-6"
@@ -192,7 +190,7 @@ const ProviderModal = () => {
             <button
               type="button"
               className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-              onClick={() => history.push('/entities')}
+              onClick={handleClose}
             >
               Cancelar
             </button>

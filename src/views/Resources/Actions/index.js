@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useDropdown from 'hooks/useDropdown';
 import { GoSearch as SearchIcon } from 'react-icons/go';
+import useDropdown from 'hooks/useDropdown';
+import { useModal } from 'context/modals';
+import MaterialModal from 'views/MaterialModal';
+import ServiceModal from 'views/ServiceModal';
+import WorkerModal from 'views/WorkerModal';
 const Actions = ({ search, onSearch = () => {} }) => {
   const [containerRef, isOpen, open] = useDropdown();
+  const { openModal } = useModal();
   return (
     <div className="flex items-center">
       <div className="w-full">
@@ -46,24 +50,24 @@ const Actions = ({ search, onSearch = () => {} }) => {
         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50">
           {isOpen && (
             <div className="py-1 rounded-md bg-white shadow-xs">
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/materials/new"
+              <button
+                className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                onClick={() => openModal(<MaterialModal />)}
               >
                 Material
-              </Link>
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/services/new"
+              </button>
+              <button
+                className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                onClick={() => openModal(<ServiceModal />)}
               >
                 Servicio
-              </Link>
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/workers/new"
+              </button>
+              <button
+                className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                onClick={() => openModal(<WorkerModal />)}
               >
-                Trabajadores
-              </Link>
+                Trabajador
+              </button>
             </div>
           )}
         </div>
