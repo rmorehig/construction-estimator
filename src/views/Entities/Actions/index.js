@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import useDropdown from 'hooks/useDropdown';
 import { GoSearch as SearchIcon } from 'react-icons/go';
 import { useModal } from 'context/modals';
 import ProviderModal from 'views/ProviderModal';
 import CustomerModal from 'views/CustomerModal';
+import Button from 'components/Button';
+
 const Actions = ({ search, onSearch = () => {} }) => {
   const [containerRef, isOpen, openDropdown] = useDropdown();
   const { openModal } = useModal();
@@ -25,26 +26,25 @@ const Actions = ({ search, onSearch = () => {} }) => {
       </div>
       <div className="ml-3 relative" ref={containerRef}>
         <div>
-          <span className="rounded-md shadow-sm">
-            <button
-              type="button"
-              className="relative inline-flex items-center px-3 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue focus:border-blue-600 active:bg-blue-600 transition duration-150 ease-in-out"
-              onClick={openDropdown}
+          <Button
+            type="button"
+            className="relative"
+            primary
+            onClick={openDropdown}
+          >
+            <svg
+              className="mr-1 -mx-1 h-5 w-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
             >
-              <svg
-                className="mr-1 -mx-1 h-5 w-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              Nuevo
-            </button>
-          </span>
+              <path
+                fillRule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Nuevo
+          </Button>
         </div>
 
         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50">

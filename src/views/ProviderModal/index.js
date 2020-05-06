@@ -7,6 +7,7 @@ import Select from 'components/Select';
 import Modal from 'components/Modal';
 import { useAddProvider } from 'graphql/mutations/entities/addProvider';
 import { GridContainer, GridItem } from 'components/Grid';
+import Button from 'components/Button';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Introduce el nombre del proveedor'),
@@ -44,7 +45,7 @@ const ProviderModal = ({ handleClose, data }) => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            Nuevo proveedor
+            {`${data ? 'Editar' : 'Nuevo'} proveedor`}
           </h3>
 
           <button
@@ -177,24 +178,12 @@ const ProviderModal = ({ handleClose, data }) => {
         </div>
 
         <div className="bg-white px-4 py-5 sm:px-6 sm:flex sm:flex-row-reverse">
-          <span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-            <button
-              type="submit"
-              className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-blue-500 text-base leading-6 font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-            >
-              Guardar
-            </button>
-          </span>
-
-          <span className="flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-            <button
-              type="button"
-              className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-              onClick={handleClose}
-            >
-              Cancelar
-            </button>
-          </span>
+          <Button type="submit" primary className="sm:ml-3">
+            Guardar
+          </Button>
+          <Button type="button" className="mt-2 sm:mt-0" onClick={handleClose}>
+            Cancelar
+          </Button>
         </div>
       </form>
     </Modal>
