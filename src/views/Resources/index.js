@@ -1,10 +1,10 @@
 import React from 'react';
-import List from './List';
 import View from 'components/View';
 import { useGetMaterials } from 'graphql/queries/resources/getMaterials';
 import Tabs from 'components/Tabs';
 import Actions from './Actions';
 import { useTabs } from 'hooks/useTabs';
+import Table from 'components/Table';
 
 const tabs = [
   {
@@ -42,8 +42,8 @@ const Resources = () => {
       name: 'Modelo'
     },
     {
-      id: 'Marca',
-      name: 'manufacturer'
+      id: 'manufacturer',
+      name: 'Marca'
     },
     {
       id: 'material_type_id',
@@ -57,7 +57,7 @@ const Resources = () => {
       actions={<Actions search={search} onSearch={handleSearch} />}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
-      <List
+      <Table
         data={data}
         columns={columns}
         count={count}

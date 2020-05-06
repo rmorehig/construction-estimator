@@ -4,7 +4,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
           LOGO + MARCA
         </h2>
       </div>
@@ -12,7 +12,7 @@ const Login = () => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mb-4 sm:mx-auto sm:w-full sm:max-w-md">
-            <span class="text-center text-xl leading-9 font-medium text-gray-900">
+            <span className="text-center text-xl leading-9 font-medium text-gray-900">
               Inicia sesión en tu cuenta
             </span>
           </div>
@@ -51,26 +51,26 @@ const Login = () => {
                 />
               </div>
             </div>
-            <div class="mt-6 flex items-center justify-between">
-              <div class="flex items-center">
+            <div className="mt-6 flex items-center justify-between">
+              <div className="flex items-center">
                 <input
                   id="remember_me"
                   type="checkbox"
-                  class="form-checkbox h-4 w-4 text-blue-500 transition duration-150 ease-in-out"
+                  className="form-checkbox h-4 w-4 text-blue-500 transition duration-150 ease-in-out"
                   checked
                 />
                 <label
                   for="remember_me"
-                  class="ml-2 block text-sm leading-5 text-gray-900"
+                  className="ml-2 block text-sm leading-5 text-gray-900"
                 >
                   Mantener sesión
                 </label>
               </div>
 
-              <div class="text-sm leading-5">
+              <div className="text-sm leading-5">
                 <a
                   href="#"
-                  class="font-medium text-blue-500 hover:text-gray-800 focus:outline-none focus:underline transition ease-in-out duration-150"
+                  className="font-medium text-blue-500 hover:text-gray-800 focus:outline-none focus:underline transition ease-in-out duration-150"
                 >
                   ¿No recuerdas la contraseña?
                 </a>

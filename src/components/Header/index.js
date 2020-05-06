@@ -30,8 +30,8 @@ const Header = () => {
                   <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50">
                     {isOpen && (
                       <div className="py-1 rounded-md bg-white shadow-xs">
-                        <div class="px-4 py-3">
-                          <p class="text-sm leading-5 font-medium text-gray-900">
+                        <div className="px-4 py-3">
+                          <p className="text-sm leading-5 font-medium text-gray-900">
                             Alejandro España Orts
                           </p>
                         </div>

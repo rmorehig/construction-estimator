@@ -4,8 +4,8 @@ import { ENTITY_FRAGMENT } from 'graphql/fragments/entity';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-export const GET_PROVIDER_DETAILS = gql`
-  query getProviderDetails($id: Int!) {
+export const GET_CUSTOMER_DETAILS = gql`
+  query getCustomerDetails($id: Int!) {
     entity_by_pk(id: $id) {
       ...entityFields
     }
@@ -13,10 +13,10 @@ export const GET_PROVIDER_DETAILS = gql`
   ${ENTITY_FRAGMENT}
 `;
 
-export const useGetProviderDetails = () => {
+export const useGetCustomerDetails = () => {
   const [data, setData] = useState({});
   const { id } = useParams();
-  const { loading } = useQuery(GET_PROVIDER_DETAILS, {
+  const { loading } = useQuery(GET_CUSTOMER_DETAILS, {
     variables: {
       id
     },

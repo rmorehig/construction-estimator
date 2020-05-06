@@ -49,19 +49,19 @@ const CustomerModal = ({ handleClose, data }) => {
 
           <button
             type="button"
-            class="text-white hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150"
+            className="text-white hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150"
             onClick={handleClose}
           >
             <svg
-              class="h-6 w-6"
+              className="h-6 w-6"
               stroke="currentColor"
               fill="none"
               viewBox="0 0 24 24"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>

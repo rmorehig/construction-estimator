@@ -1,11 +1,13 @@
 import React from 'react';
-import List from './List';
 import View from 'components/View';
 import { useGetEntities } from 'graphql/queries/entities/getEntities';
 import Tabs from 'components/Tabs';
 import Actions from './Actions';
 import { useTabs } from 'hooks/useTabs';
 import { types } from 'utils/entities';
+import Table from 'components/Table';
+import { useHistory } from 'react-router-dom';
+import Badge from 'components/Badge';
 
 const tabs = [
   {
@@ -13,16 +15,8 @@ const tabs = [
     name: 'Todo'
   },
   {
-    id: 'materialProviders',
-    name: 'Materiales'
-  },
-  {
-    id: 'serviceProviders',
-    name: 'Servicios'
-  },
-  {
-    id: 'workerProviders',
-    name: 'Trabajadores'
+    id: 'providers',
+    name: 'Proveedores'
   },
   {
     id: 'customers',
@@ -30,8 +24,40 @@ const tabs = [
   }
 ];
 
+const columns = [
+  {
+    id: 'name',
+    name: 'Nombre'
+  },
+  {
+    id: 'email',
+    name: 'Email'
+  },
+  {
+    id: 'phone',
+    name: 'Teléfono'
+  },
+  {
+    id: 'city',
+    name: 'Población'
+  },
+  {
+    id: 'tags',
+    name: 'Etiquetas',
+    component: ({ provider, customer }) =>
+      provider || customer ? (
+        <Badge blue={provider} green={customer}>
+          {provider ? 'Proveedor' : 'Cliente'}
+        </Badge>
+      ) : (
+        <div />
+      )
+  }
+];
+
 const Entities = () => {
   const { currentTab, toggleTab } = useTabs('all');
+  const history = useHistory();
   const {
     data,
     count,
@@ -40,24 +66,10 @@ const Entities = () => {
     handleSearch,
     ...pagination
   } = useGetEntities(types[currentTab]);
-  const columns = [
-    {
-      id: 'name',
-      name: 'Nombre'
-    },
-    {
-      id: 'email',
-      name: 'Email'
-    },
-    {
-      id: 'phone',
-      name: 'Teléfono'
-    },
-    {
-      id: 'city',
-      name: 'Población'
-    }
-  ];
+
+  const handleClickRow = (row) => {
+    history.push(`/entities/providers/${row.id}`);
+  };
 
   return (
     <View
@@ -65,11 +77,12 @@ const Entities = () => {
       actions={<Actions search={search} onSearch={handleSearch} />}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
-      <List
+      <Table
         data={data}
         columns={columns}
         count={count}
         loading={loading}
+        onClickRow={handleClickRow}
         {...pagination}
       />
     </View>

@@ -52,11 +52,11 @@ const Filter = ({ title = '', value, onChange = () => {} }) => {
         {title}
       </span>
       {showFilter && (
-        <div class="origin-top-right absolute right-0 top-5 mt-2 w-56 rounded-md shadow-lg">
-          <div class="rounded-md bg-white shadow-xs">
-            <div class="py-6 px-3">
+        <div className="origin-top-right absolute right-0 top-5 mt-2 w-56 rounded-md shadow-lg">
+          <div className="rounded-md bg-white shadow-xs">
+            <div className="py-6 px-3">
               <input
-                class="form-input block w-full sm:text-sm sm:leading-5"
+                className="form-input block w-full sm:text-sm sm:leading-5"
                 placeholder={`Buscar ${title.toLowerCase()}`}
                 value={value}
                 onChange={onChange}

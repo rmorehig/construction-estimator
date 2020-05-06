@@ -13,6 +13,12 @@ export const GET_ENTITIES = gql`
   ) {
     entity(limit: $limit, offset: $offset, order_by: $orderBy, where: $where) {
       ...entityFields
+      provider {
+        id
+      }
+      customer {
+        id
+      }
     }
 
     entity_aggregate(where: $where) {

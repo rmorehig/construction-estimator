@@ -60,7 +60,6 @@ const ModalProvider = (props) => {
       {modal && (
         <ModalRenderer handleClose={closeModal} data={data} modal={modal} />
       )}
-      }
     </ModalContext.Provider>
   );
 };

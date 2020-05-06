@@ -11,7 +11,7 @@ const Textarea = React.forwardRef((props, ref) => {
           {props.label}
         </label>
       )}
-      <div class="rounded-md shadow-sm">
+      <div className="rounded-md shadow-sm">
         <textarea
           ref={ref}
           {...props}

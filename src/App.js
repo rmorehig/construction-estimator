@@ -5,11 +5,9 @@ import { PublicRoute } from 'routes/PublicRoute';
 import { PrivateRoute } from 'routes/PrivateRoute';
 import Entities from 'views/Entities';
 import Login from 'views/Login';
-import ProviderModal from 'views/ProviderModal';
-import CustomerModal from 'views/CustomerModal';
-import MaterialModal from 'views/MaterialModal';
 import Resources from 'views/Resources';
 import ProviderDetails from 'views/ProviderDetails';
+import CustomerDetails from 'views/CustomerDetails';
 import { ModalProvider } from 'context/modals';
 
 function App() {
@@ -27,23 +25,13 @@ function App() {
           <PrivateRoute exact path="/team" component={Entities} />
           <PrivateRoute
             exact
-            path="/entities/providers/new"
-            component={ProviderModal}
-          />
-          <PrivateRoute
-            exact
-            path="/entities/customers/new"
-            component={CustomerModal}
-          />
-          <PrivateRoute
-            exact
-            path="/resources/materials/new"
-            component={MaterialModal}
-          />
-          <PrivateRoute
-            exact
             path="/entities/providers/:id"
             component={ProviderDetails}
+          />
+          <PrivateRoute
+            exact
+            path="/entities/customers/:id"
+            component={CustomerDetails}
           />
           <Redirect to="/dashboard" />
         </Switch>
