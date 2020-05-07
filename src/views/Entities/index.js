@@ -46,7 +46,7 @@ const columns = [
     name: 'Etiquetas',
     component: ({ provider, customer }) =>
       provider || customer ? (
-        <Badge blue={provider} green={customer}>
+        <Badge blue={provider} teal={customer}>
           {provider ? 'Proveedor' : 'Cliente'}
         </Badge>
       ) : (

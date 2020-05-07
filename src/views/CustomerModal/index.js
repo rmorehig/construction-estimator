@@ -1,14 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
 import Input from 'components/Input';
 import Textarea from 'components/Textarea';
 import Select from 'components/Select';
 import Modal from 'components/Modal';
-import { useAddCustomer } from 'graphql/mutations/entities/addCustomer';
 import { GridContainer, GridItem } from 'components/Grid';
 import Button from 'components/Button';
 import { useUpdateCustomer } from 'graphql/mutations/entities/updateCustomer';
+import { useAddCustomer } from 'graphql/mutations/entities/addCustomer';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Introduce el nombre del cliente'),

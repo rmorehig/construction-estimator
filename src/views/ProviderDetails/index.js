@@ -51,7 +51,12 @@ const ProviderDetails = () => {
     observations
   } = data.entity;
   return (
-    <View title="Proveedor" actions={<Actions data={data.entity} />}>
+    <View
+      title={name}
+      parent="/entities"
+      actions={<Actions data={data.entity} />}
+      badge={{ color: 'blue', value: 'Proveedor' }}
+    >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
         <GridItem xs={4}>
@@ -59,8 +64,7 @@ const ProviderDetails = () => {
             <CardHeader title="Información" />
             <CardContent noPadding>
               <DescriptionList>
-                <DescriptionRow term="Nombre" description={name} noBorder />
-                <DescriptionRow term="DNI/CIF" description={code} />
+                <DescriptionRow term="DNI/CIF" description={code} noBorder />
                 <DescriptionRow term="Email" description={email} />
                 <DescriptionRow term="Teléfono" description={phone} />
                 <DescriptionRow

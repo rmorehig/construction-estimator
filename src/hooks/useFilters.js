@@ -106,8 +106,12 @@ export const useFilters = (initialPattern = {}) => {
     dispatch
   ] = useReducer(reducer, {
     ...initialValues,
+    limit: initialPattern.limit || initialValues.limit,
     filters: initialPattern.filters,
-    where: parseWhere(initialPattern),
+    where:
+      initialPattern.filters?.length > 0
+        ? parseWhere(initialPattern)
+        : undefined,
     orderBy: initialPattern.orderBy
   });
   useEffect(() => {

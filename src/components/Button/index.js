@@ -19,7 +19,7 @@ const Button = ({
   );
 
   const buttonClasses = classnames(baseButton, {
-    'border border-gray-300 text-gray-700 bg-white hover:text-gray-500 active:text-gray-800 active:bg-gray-50': !primary,
+    'border border-gray-300 text-gray-700 bg-white hover:text-blue-500 active:text-gray-800 active:bg-gray-50': !primary,
     'border border-transparent text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:border-blue-700': primary,
     'w-full': fullWidth
   });

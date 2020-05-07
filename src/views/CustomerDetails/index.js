@@ -8,6 +8,7 @@ import Actions from './Actions';
 import { GridContainer, GridItem } from 'components/Grid';
 import { CardContent, Card, CardHeader } from 'components/Card';
 import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
+import Contacts from './Contacts';
 
 const tabs = [
   {
@@ -15,22 +16,18 @@ const tabs = [
     name: 'Detalles'
   },
   {
-    id: 'materials',
-    name: 'Materiales'
+    id: 'bids',
+    name: 'Licitaciones'
   },
   {
-    id: 'services',
-    name: 'Servicios'
-  },
-  {
-    id: 'workers',
-    name: 'Trabajadores'
+    id: 'constructions',
+    name: 'Obras'
   }
 ];
 
 const CustomerDetails = () => {
   const { currentTab, toggleTab } = useTabs('summary');
-  const { data, loading } = useGetCustomerDetails();
+  const { data, loading, ...pagination } = useGetCustomerDetails();
   if (loading)
     return (
       <div className="flex flex-1 justify-center text-5xl overflow-hidden">
@@ -48,19 +45,24 @@ const CustomerDetails = () => {
     province,
     country,
     observations,
-    website
-  } = data.entity;
+    website,
+    contacts
+  } = data?.entity;
   return (
-    <View title="Cliente" actions={<Actions data={data.entity} />}>
+    <View
+      title={name}
+      parent="/entities"
+      actions={<Actions data={data.entity} />}
+      badge={{ color: 'teal', value: 'Cliente' }}
+    >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
-        <GridItem xs={4}>
+        <GridItem xs={3}>
           <Card>
             <CardHeader title="Información" />
             <CardContent noPadding>
               <DescriptionList>
-                <DescriptionRow term="Nombre" description={name} noBorder />
-                <DescriptionRow term="DNI/CIF" description={code} />
+                <DescriptionRow term="DNI/CIF" description={code} noBorder />
                 <DescriptionRow term="Email" description={email} />
                 <DescriptionRow term="Teléfono" description={phone} />
                 <DescriptionRow
@@ -78,11 +80,8 @@ const CustomerDetails = () => {
             </CardContent>
           </Card>
         </GridItem>
-        <GridItem xs={2}>
-          <Card>
-            <CardHeader title="Contactos" />
-            <CardContent>Aquí van contactos</CardContent>
-          </Card>
+        <GridItem xs={3}>
+          <Contacts contacts={contacts} {...pagination} />
         </GridItem>
       </GridContainer>
     </View>
