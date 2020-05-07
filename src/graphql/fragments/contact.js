@@ -17,8 +17,5 @@ export const CONTACT_FRAGMENT = gql`
     default_contact
     position
     entity_id
-    entity {
-      name
-    }
   }
 `;

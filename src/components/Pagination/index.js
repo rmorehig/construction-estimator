@@ -11,7 +11,7 @@ const Pagination = ({
   showPage = false
 }) => {
   return (
-    <div className="flex items-center sm:px-6 w-full">
+    <div className="flex items-center w-full">
       {showCount && (
         <div className="hidden sm:block">
           <p className="text-sm leading-5 text-gray-700">

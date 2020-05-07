@@ -4,14 +4,16 @@ import { List, ListItem } from 'components/List';
 import Contact from './Contact';
 import Pagination from 'components/Pagination';
 import Actions from './Actions';
+import { useGetContactsByEntity } from 'graphql/queries/entities/getContactsByEntity';
 
-const Contacts = ({ contacts = [], ...pagination }) => {
+const Contacts = () => {
+  const { data, loading, ...pagination } = useGetContactsByEntity();
   return (
     <Card>
       <CardHeader title="Contactos" action={<Actions />} />
       <CardContent noPadding>
-        <List>
-          {contacts.map(({ id, ...contactInfo }, index) => (
+        <List loading={loading}>
+          {data?.contacts.map(({ id, ...contactInfo }, index) => (
             <ListItem key={id} noBorder={index === 4}>
               <Contact {...contactInfo} />
             </ListItem>

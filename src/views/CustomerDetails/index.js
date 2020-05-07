@@ -1,14 +1,14 @@
 import React from 'react';
 import View from 'components/View';
 import Tabs from 'components/Tabs';
-import { useTabs } from 'hooks/useTabs';
-import { useGetCustomerDetails } from 'graphql/queries/entities/getCustomerDetails';
 import Spinner from 'components/Spinner';
 import Actions from './Actions';
 import { GridContainer, GridItem } from 'components/Grid';
 import { CardContent, Card, CardHeader } from 'components/Card';
 import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
 import Contacts from './Contacts';
+import { useTabs } from 'hooks/useTabs';
+import { useGetCustomerDetails } from 'graphql/queries/entities/getCustomerDetails';
 
 const tabs = [
   {
@@ -27,7 +27,7 @@ const tabs = [
 
 const CustomerDetails = () => {
   const { currentTab, toggleTab } = useTabs('summary');
-  const { data, loading, ...pagination } = useGetCustomerDetails();
+  const { data, loading } = useGetCustomerDetails();
   if (loading)
     return (
       <div className="flex flex-1 justify-center text-5xl overflow-hidden">
@@ -45,8 +45,7 @@ const CustomerDetails = () => {
     province,
     country,
     observations,
-    website,
-    contacts
+    website
   } = data?.entity;
   return (
     <View
@@ -81,7 +80,7 @@ const CustomerDetails = () => {
           </Card>
         </GridItem>
         <GridItem xs={3}>
-          <Contacts contacts={contacts} {...pagination} />
+          <Contacts />
         </GridItem>
       </GridContainer>
     </View>

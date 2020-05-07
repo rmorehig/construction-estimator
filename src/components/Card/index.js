@@ -37,7 +37,7 @@ const CardContent = ({ children, noPadding }) => (
   </div>
 );
 const CardFooter = ({ children }) => (
-  <div className="border-t border-gray-200 px-4 py-4 sm:px-6">{children}</div>
+  <div className="border-t border-gray-200 px-4 py-4">{children}</div>
 );
 
 export { Card, CardHeader, CardContent, CardFooter };

@@ -31,7 +31,7 @@ const tabs = [
 
 const ProviderDetails = () => {
   const { currentTab, toggleTab } = useTabs('summary');
-  const { data, loading, ...pagination } = useGetProviderDetails();
+  const { data, loading } = useGetProviderDetails();
   if (loading)
     return (
       <div className="flex flex-1 justify-center text-5xl overflow-hidden">
@@ -49,8 +49,7 @@ const ProviderDetails = () => {
     city,
     province,
     country,
-    observations,
-    contacts
+    observations
   } = data.entity;
   return (
     <View
@@ -85,7 +84,7 @@ const ProviderDetails = () => {
           </Card>
         </GridItem>
         <GridItem xs={3}>
-          <Contacts contacts={contacts} {...pagination} />
+          <Contacts />
         </GridItem>
       </GridContainer>
     </View>
