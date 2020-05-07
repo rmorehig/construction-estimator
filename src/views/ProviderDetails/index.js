@@ -1,13 +1,14 @@
 import React from 'react';
 import View from 'components/View';
 import Tabs from 'components/Tabs';
-import { useTabs } from 'hooks/useTabs';
-import { useGetProviderDetails } from 'graphql/queries/entities/getProviderDetails';
 import Spinner from 'components/Spinner';
-import Actions from './Actions';
 import { CardContent, Card, CardHeader } from 'components/Card';
 import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
 import { GridItem, GridContainer } from 'components/Grid';
+import Actions from './Actions';
+import Contacts from './Contacts';
+import { useTabs } from 'hooks/useTabs';
+import { useGetProviderDetails } from 'graphql/queries/entities/getProviderDetails';
 
 const tabs = [
   {
@@ -30,7 +31,7 @@ const tabs = [
 
 const ProviderDetails = () => {
   const { currentTab, toggleTab } = useTabs('summary');
-  const { data, loading } = useGetProviderDetails();
+  const { data, loading, ...pagination } = useGetProviderDetails();
   if (loading)
     return (
       <div className="flex flex-1 justify-center text-5xl overflow-hidden">
@@ -48,7 +49,8 @@ const ProviderDetails = () => {
     city,
     province,
     country,
-    observations
+    observations,
+    contacts
   } = data.entity;
   return (
     <View
@@ -59,7 +61,7 @@ const ProviderDetails = () => {
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
-        <GridItem xs={4}>
+        <GridItem xs={3}>
           <Card>
             <CardHeader title="Información" />
             <CardContent noPadding>
@@ -82,11 +84,8 @@ const ProviderDetails = () => {
             </CardContent>
           </Card>
         </GridItem>
-        <GridItem xs={2}>
-          <Card>
-            <CardHeader title="Contactos" />
-            <CardContent>Aquí van contactos</CardContent>
-          </Card>
+        <GridItem xs={3}>
+          <Contacts contacts={contacts} {...pagination} />
         </GridItem>
       </GridContainer>
     </View>

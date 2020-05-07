@@ -3,7 +3,7 @@ import React from 'react';
 const Card = ({ children }) => (
   <div
     className="h-full flex flex-col bg-white overflow-hidden shadow rounded-lg"
-    style={{ height: '544px' }}
+    style={{ height: '582px' }}
   >
     {children}
   </div>

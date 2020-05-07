@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import useDropdown from 'hooks/useDropdown';
 import Divider from 'components/Divider';
 import { useModal } from 'context/modals';
@@ -35,31 +34,13 @@ const Actions = ({ data }) => {
         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50">
           {isOpen && (
             <div className="py-1 rounded-md bg-white shadow-xs">
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/materials/new"
-              >
-                Material
-              </Link>
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/services/new"
-              >
-                Servicio
-              </Link>
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/resources/workers/new"
-              >
-                Trabajador
-              </Link>
+              <span className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                Oferta
+              </span>
               <Divider />
-              <Link
-                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                to="/entities/contacts/new"
-              >
+              <span className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                 Contacto
-              </Link>
+              </span>
             </div>
           )}
         </div>

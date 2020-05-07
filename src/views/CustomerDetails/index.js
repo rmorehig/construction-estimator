@@ -17,7 +17,7 @@ const tabs = [
   },
   {
     id: 'bids',
-    name: 'Licitaciones'
+    name: 'Ofertas'
   },
   {
     id: 'constructions',
