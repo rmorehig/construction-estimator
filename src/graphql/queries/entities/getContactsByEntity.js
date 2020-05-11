@@ -1,8 +1,9 @@
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { CONTACT_FRAGMENT } from 'graphql/fragments/contact';
 import { useParams, useHistory } from 'react-router-dom';
 import useFilters from 'hooks/useFilters';
+import { CONTACT_FRAGMENT } from 'graphql/fragments/contact';
+import { useEffect } from 'react';
 
 export const GET_CONTACTS_BY_ENTITY = gql`
   query getContactsByEntity(
@@ -11,7 +12,7 @@ export const GET_CONTACTS_BY_ENTITY = gql`
     $offset: Int
     $orderBy: [contact_order_by!]
   ) {
-    contacts: contact(
+    contact(
       limit: $limit
       offset: $offset
       order_by: $orderBy
@@ -31,15 +32,7 @@ export const GET_CONTACTS_BY_ENTITY = gql`
 export const useGetContactsByEntity = () => {
   const { id } = useParams();
   const history = useHistory();
-  const {
-    count,
-    setCount,
-    limit,
-    offset,
-    nextPage,
-    previousPage,
-    orderBy
-  } = useFilters({
+  const { limit, offset, orderBy, setCount, ...pagination } = useFilters({
     limit: 5,
     filters: ['name'],
     search: '',
@@ -47,23 +40,26 @@ export const useGetContactsByEntity = () => {
   });
   const { data, loading } = useQuery(GET_CONTACTS_BY_ENTITY, {
     variables: {
-      id,
+      id: Number(id),
       limit,
       offset,
       orderBy
     },
     fetchPolicy: 'cache-and-network',
-    onCompleted: (response) => {
-      setCount(response.contact_aggregate.aggregate.count);
-    },
+    partialRefetch: true,
     onError: () => history.push('/entities')
   });
-
+  useEffect(() => {
+    if (data) {
+      setCount(data?.contact_aggregate.aggregate.count);
+    }
+    return () => {
+      setCount(0);
+    };
+  }, [data]);
   return {
     data,
     loading,
-    count,
-    nextPage,
-    previousPage
+    ...pagination
   };
 };

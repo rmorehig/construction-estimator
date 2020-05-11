@@ -4,12 +4,7 @@ import { ENTITY_FRAGMENT } from 'graphql/fragments/entity';
 import { useParams, useHistory } from 'react-router-dom';
 
 export const GET_CUSTOMER_DETAILS = gql`
-  query getCustomerDetails(
-    $id: Int!
-    $limit: Int
-    $offset: Int
-    $orderBy: [contact_order_by!]
-  ) {
+  query getCustomerDetails($id: Int!) {
     entity: entity_by_pk(id: $id) {
       ...entityFields
     }

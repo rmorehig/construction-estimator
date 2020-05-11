@@ -5,9 +5,21 @@ import Contact from './Contact';
 import Pagination from 'components/Pagination';
 import Actions from './Actions';
 import { useGetContactsByEntity } from 'graphql/queries/entities/getContactsByEntity';
+import useFilters from 'hooks/useFilters';
 
 const Contacts = () => {
-  const { data, loading, ...pagination } = useGetContactsByEntity();
+  const { limit, offset, orderBy, setCount, ...pagination } = useFilters({
+    limit: 5,
+    filters: ['name'],
+    search: '',
+    orderBy: { default_contact: 'desc' }
+  });
+  const { data, loading } = useGetContactsByEntity({
+    limit,
+    offset,
+    orderBy,
+    setCount
+  });
   return (
     <Card>
       <CardHeader title="Contactos" action={<Actions />} />

@@ -16,9 +16,9 @@ const View = ({ children, title = '', actions, badge, parent }) => {
                 <svg
                   className="flex-shrink-0 h-5 w-5 text-gray-600"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >

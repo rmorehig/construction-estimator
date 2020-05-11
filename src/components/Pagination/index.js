@@ -7,6 +7,7 @@ const Pagination = ({
   page = 1,
   previousPage = () => {},
   nextPage = () => {},
+  fetchMore = () => {},
   showCount = false,
   showPage = false
 }) => {

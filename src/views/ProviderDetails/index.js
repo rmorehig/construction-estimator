@@ -1,7 +1,6 @@
 import React from 'react';
 import View from 'components/View';
 import Tabs from 'components/Tabs';
-import Spinner from 'components/Spinner';
 import { CardContent, Card, CardHeader } from 'components/Card';
 import { DescriptionList, DescriptionRow } from 'components/DescriptionList';
 import { GridItem, GridContainer } from 'components/Grid';
@@ -16,28 +15,15 @@ const tabs = [
     name: 'Detalles'
   },
   {
-    id: 'materials',
-    name: 'Materiales'
-  },
-  {
-    id: 'services',
-    name: 'Servicios'
-  },
-  {
-    id: 'workers',
-    name: 'Trabajadores'
+    id: 'resources',
+    name: 'Recursos'
   }
 ];
 
 const ProviderDetails = () => {
   const { currentTab, toggleTab } = useTabs('summary');
   const { data, loading } = useGetProviderDetails();
-  if (loading)
-    return (
-      <div className="flex flex-1 justify-center text-5xl overflow-hidden">
-        <Spinner className="text-blue-600 mt-16" />
-      </div>
-    );
+
   const {
     name,
     code,
@@ -50,12 +36,12 @@ const ProviderDetails = () => {
     province,
     country,
     observations
-  } = data.entity;
+  } = data?.entity || {};
   return (
     <View
       title={name}
       parent="/entities"
-      actions={<Actions data={data.entity} />}
+      actions={<Actions data={data?.entity} />}
       badge={{ color: 'blue', value: 'Proveedor' }}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
@@ -63,7 +49,7 @@ const ProviderDetails = () => {
         <GridItem xs={3}>
           <Card>
             <CardHeader title="Información" />
-            <CardContent noPadding>
+            <CardContent noPadding loading={loading}>
               <DescriptionList>
                 <DescriptionRow term="DNI/CIF" description={code} noBorder />
                 <DescriptionRow term="Email" description={email} />

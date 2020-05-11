@@ -1,17 +1,19 @@
 import React from 'react';
 import { useModal } from 'context/modals';
-import ProviderModal from 'views/ProviderModal';
 import IconButton from 'components/IconButton';
+import ContactModal from 'views/ContactModal';
+import { useParams } from 'react-router-dom';
 
 const Actions = () => {
   const { openModal } = useModal();
+  const { id } = useParams();
   return (
     <div className="flex items-center">
       <div className="w-full"></div>
       <IconButton
         variant="none"
         icon="plus"
-        onClick={() => openModal(<ProviderModal />)}
+        onClick={() => openModal(<ContactModal />, { id, isNew: true })}
       />
     </div>
   );

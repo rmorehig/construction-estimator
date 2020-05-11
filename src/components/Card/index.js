@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'components/Spinner';
 
 const Card = ({ children }) => (
   <div
@@ -27,15 +28,23 @@ const CardHeader = ({ title, subtitle, noBorder, action }) => (
   </div>
 );
 
-const CardContent = ({ children, noPadding }) => (
-  <div
-    className={`overflow-hidden flex-1 text-sm ${
-      !noPadding && 'px-4 py-5 sm:p-6'
-    }`}
-  >
-    {children}
-  </div>
-);
+const CardContent = ({ children, noPadding, loading = false }) => {
+  if (loading)
+    return (
+      <div className="h-full flex items-center justify-center text-5xl overflow-hidden">
+        <Spinner className="text-blue-600" />
+      </div>
+    );
+  return (
+    <div
+      className={`overflow-hidden flex-1 text-sm ${
+        !noPadding && 'px-4 py-5 sm:p-6'
+      }`}
+    >
+      {children}
+    </div>
+  );
+};
 const CardFooter = ({ children }) => (
   <div className="border-t border-gray-200 px-4 py-4">{children}</div>
 );

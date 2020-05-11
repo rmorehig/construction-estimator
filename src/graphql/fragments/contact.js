@@ -7,7 +7,6 @@ export const CONTACT_FRAGMENT = gql`
     name
     email
     phone
-    city
     observations
     address
     city

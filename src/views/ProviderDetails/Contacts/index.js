@@ -8,12 +8,13 @@ import { useGetContactsByEntity } from 'graphql/queries/entities/getContactsByEn
 
 const Contacts = () => {
   const { data, loading, ...pagination } = useGetContactsByEntity();
+
   return (
     <Card>
       <CardHeader title="Contactos" action={<Actions />} />
-      <CardContent noPadding>
-        <List loading={loading}>
-          {data?.contacts.map(({ id, ...contactInfo }, index) => (
+      <CardContent noPadding loading={loading}>
+        <List>
+          {data?.contact.map(({ id, ...contactInfo }, index) => (
             <ListItem key={id} noBorder={index === 4}>
               <Contact {...contactInfo} />
             </ListItem>
