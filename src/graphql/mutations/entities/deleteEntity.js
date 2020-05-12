@@ -1,13 +1,12 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { useHistory } from 'react-router-dom';
 import { useNotifications } from 'context/notifications';
-import { GET_CONTACTS_BY_ENTITY } from 'graphql/queries/entities/getContactsByEntity';
 import { CONTACT_FRAGMENT } from 'graphql/fragments/contact';
+import { GET_CONTACTS_BY_ENTITY } from 'graphql/queries/entities/getContactsByEntity';
 
-export const UPDATE_CONTACT = gql`
-  mutation updateContact($id: Int!, $set: contact_set_input!) {
-    update_contact(where: { id: { _eq: $id } }, _set: $set) {
+export const DELETE_CONTACT = gql`
+  mutation deleteContact($id: Int!) {
+    delete_contact(where: { id: { _eq: $id } }) {
       affected_rows
       returning {
         ...contactFields
@@ -17,24 +16,23 @@ export const UPDATE_CONTACT = gql`
   ${CONTACT_FRAGMENT}
 `;
 
-export const useUpdateContact = () => {
-  const { push } = useHistory();
+export const useAddContact = () => {
   const { setMessage } = useNotifications();
-  let [mutate, { data, loading, error }] = useMutation(UPDATE_CONTACT, {
+  let [mutate, { data, loading, error }] = useMutation(DELETE_CONTACT, {
     onCompleted: () => {
-      setMessage('Contacto actualizado correctamente');
+      setMessage('Contacto eliminado correctamente');
     },
-    onError: () => push('/entities/')
+    onError: () => {
+      setMessage(
+        'Error al eliminar el contacto seleccionado. Inténtelo de nuevo.'
+      );
+    }
   });
   return {
-    updateContact: ({ id, ...values }) =>
+    addContact: (values) =>
       mutate({
         variables: {
-          id,
-          set: {
-            ...values,
-            __typename: undefined
-          }
+          objects: values
         },
         refetchQueries: [
           {

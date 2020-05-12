@@ -6,8 +6,10 @@ import useDropdown from 'hooks/useDropdown';
 const Header = () => {
   const [containerRef, isOpen, toggle] = useDropdown();
   return (
-    <header className="shadow flex bg-gray-800 flex flex-shrink-0">
-      <div className="w-64"></div>
+    <header className="shadow flex bg-blue-500 flex flex-shrink-0 border-b border-gray-200 shadow-sm">
+      <div className="w-64 flex items-center px-8">
+        <span className="font-medium text-white">LOGO + MARCA</span>
+      </div>
       <nav className="flex-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-end h-16">

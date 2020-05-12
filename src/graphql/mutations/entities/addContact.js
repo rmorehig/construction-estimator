@@ -11,7 +11,6 @@ export const ADD_CONTACT = gql`
       affected_rows
       returning {
         ...contactFields
-        __typename
       }
     }
   }
@@ -34,37 +33,17 @@ export const useAddContact = () => {
         variables: {
           objects: values
         },
-        update: (cache, { data: { insert_contact } }) => {
-          const newContact = insert_contact.returning[0];
-          const { contact, contact_aggregate } = cache.readQuery({
+        refetchQueries: [
+          {
             query: GET_CONTACTS_BY_ENTITY,
             variables: {
-              id: Number(newContact.entity_id),
+              id: Number(values.entity_id),
               limit: 5,
               offset: 0,
               orderBy: { default_contact: 'desc' }
             }
-          });
-          cache.writeQuery({
-            query: GET_CONTACTS_BY_ENTITY,
-            variables: {
-              id: Number(newContact.entity_id),
-              limit: 5,
-              offset: 0,
-              orderBy: { default_contact: 'desc' }
-            },
-            data: {
-              contact: [...contact, newContact],
-              contact_aggregate: {
-                aggregate: {
-                  count: contact_aggregate.aggregate.count + 1,
-                  __typename: 'contact_aggregate_fields'
-                },
-                __typename: 'contact_aggregate'
-              }
-            }
-          });
-        }
+          }
+        ]
       }),
     data,
     error,

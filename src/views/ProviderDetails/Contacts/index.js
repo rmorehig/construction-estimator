@@ -5,17 +5,23 @@ import Contact from './Contact';
 import Pagination from 'components/Pagination';
 import Actions from './Actions';
 import { useGetContactsByEntity } from 'graphql/queries/entities/getContactsByEntity';
+import Badge from 'components/Badge';
 
 const Contacts = () => {
   const { data, loading, ...pagination } = useGetContactsByEntity();
-
+  const renderTitle = () => (
+    <div>
+      <span className="mr-1">Contactos</span>
+      {!loading && <Badge orange>{pagination.count}</Badge>}
+    </div>
+  );
   return (
     <Card>
-      <CardHeader title="Contactos" action={<Actions />} />
+      <CardHeader title={renderTitle()} action={<Actions />} />
       <CardContent noPadding loading={loading}>
         <List>
-          {data?.contact.map(({ id, ...contactInfo }, index) => (
-            <ListItem key={id} noBorder={index === 4}>
+          {data?.contacts.map((contactInfo, index) => (
+            <ListItem key={contactInfo.id} noBorder={index === 4}>
               <Contact {...contactInfo} />
             </ListItem>
           ))}

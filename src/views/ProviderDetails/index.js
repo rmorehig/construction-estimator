@@ -8,6 +8,7 @@ import Actions from './Actions';
 import Contacts from './Contacts';
 import { useTabs } from 'hooks/useTabs';
 import { useGetProviderDetails } from 'graphql/queries/entities/getProviderDetails';
+import IconLink from 'components/IconLink';
 
 const tabs = [
   {
@@ -52,8 +53,18 @@ const ProviderDetails = () => {
             <CardContent noPadding loading={loading}>
               <DescriptionList>
                 <DescriptionRow term="DNI/CIF" description={code} noBorder />
-                <DescriptionRow term="Email" description={email} />
-                <DescriptionRow term="Teléfono" description={phone} />
+                <DescriptionRow
+                  term="Email"
+                  description={
+                    <IconLink type="email" value={email} showAlways />
+                  }
+                />
+                <DescriptionRow
+                  term="Teléfono"
+                  description={
+                    <IconLink type="phone" value={phone} showAlways />
+                  }
+                />
                 <DescriptionRow
                   term="Dirección"
                   description={`${address || ''} ${postal_code || ''} ${

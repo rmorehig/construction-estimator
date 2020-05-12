@@ -35,7 +35,7 @@ const IconLink = ({ type, value, showAlways = false }) => {
   return (
     <a
       href={`${types[type]?.value}${value}`}
-      className="flex items-center text-sm leading-5 text-gray-400 hover:text-blue-500 transition duration-150 ease-in-out"
+      className="flex items-center text-sm leading-5 hover:text-blue-500 transition duration-150 ease-in-out"
       onMouseEnter={() => setShowValue(true)}
       onMouseLeave={() => setShowValue(false)}
     >

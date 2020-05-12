@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Icon from 'components/Icon';
 
 const NavItem = ({ name, route, icon }) => (
   <NavLink
     to={route}
-    activeClassName="bg-gray-300"
-    className={`group flex items-center mt-1 px-3 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md hover:text-gray-900 focus:outline-none hover:bg-gray-300 transition ease-in-out duration-150`}
+    activeClassName="bg-gray-400 text-gray-900"
+    className={`group flex items-center mt-1 px-3 py-2 text-sm leading-5 font-medium text-gray-400 rounded-md hover:text-gray-900 focus:outline-none hover:bg-gray-400 transition ease-in-out duration-150`}
   >
     {icon}
     <span className="truncate">{name}</span>
@@ -14,7 +15,7 @@ const NavItem = ({ name, route, icon }) => (
 
 const DashboardIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -30,7 +31,7 @@ const DashboardIcon = () => (
 const EntitiesIcon = () => (
   <svg
     fill="none"
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     viewBox="0 0 24 24"
   >
@@ -44,7 +45,7 @@ const EntitiesIcon = () => (
 );
 const ResourcesIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -59,7 +60,7 @@ const ResourcesIcon = () => (
 );
 const TeamIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -75,7 +76,7 @@ const TeamIcon = () => (
 
 const ConstructionsIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -91,7 +92,7 @@ const ConstructionsIcon = () => (
 
 const CalendarIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -106,7 +107,7 @@ const CalendarIcon = () => (
 );
 const BidsIcon = () => (
   <svg
-    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150"
+    className="flex-shrink-0 -ml-1 mr-3 h-6 w-6"
     stroke="currentColor"
     fill="none"
     viewBox="0 0 24 24"
@@ -121,60 +122,76 @@ const BidsIcon = () => (
 );
 const Sidebar = () => {
   return (
-    <div className="hidden md:flex md:flex-shrink-0 shadow-sm bg-cool-gray-50 h-screen">
+    <div className="hidden md:flex md:flex-shrink-0 shadow-sm bg-cool-gray-800 h-screen">
       <div className="flex flex-col w-64 border-r border-gray-200">
-        <div className="h-0 flex-1 flex flex-col px-4">
-          <nav className="mt-5">
-            <h3 className="px-3 text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
-              Menú
-            </h3>
-            <div>
-              <NavItem
-                route="/dashboard"
-                name="Inicio"
-                icon={<DashboardIcon />}
-              />
-
-              <NavItem
-                route="/constructions"
-                name="Obras"
-                icon={<ConstructionsIcon />}
-              />
-              <NavItem route="/bids" name="Licitaciones" icon={<BidsIcon />} />
-              <NavItem
-                route="/entities"
-                name="Entidades"
-                icon={<EntitiesIcon />}
-              />
-              <NavItem
-                route="/resources"
-                name="Recursos"
-                icon={<ResourcesIcon />}
-              />
-              <NavItem
-                route="/calendar"
-                name="Calendario"
-                icon={<CalendarIcon />}
-              />
-              <NavItem route="/team" name="Equipo" icon={<TeamIcon />} />
-            </div>
-            <div className="mt-5">
+        <div className="h-0 flex-1 flex flex-col justify-between">
+          <nav>
+            <div className="mt-5 p-4 border-b border-gray-500">
               <h3 className="px-3 text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
                 Obras activas
               </h3>
               <div className="mt-2">
                 <a
                   href="#"
-                  className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
+                  className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
                 >
                   <span className="truncate">Reforma Universidad Almería</span>
                 </a>
                 <a
                   href="#"
-                  className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
+                  className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
                 >
-                  <span className="truncate">Construcción Edificio Falso</span>
+                  <span className="truncate">
+                    Construcción Edificio Poeta Durbán
+                  </span>
                 </a>
+                <a
+                  href="#"
+                  className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-blue-400 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                >
+                  <Icon name="plus" />
+                  <span className="ml-1 truncate">Nueva Obra</span>
+                </a>
+              </div>
+            </div>
+            <div className="mt-5 p-4">
+              <h3 className="mt-2 px-3 text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
+                Menú
+              </h3>
+              <div className="mt-2">
+                <NavItem
+                  route="/dashboard"
+                  name="Inicio"
+                  icon={<DashboardIcon />}
+                />
+
+                <NavItem
+                  route="/constructions"
+                  name="Obras"
+                  icon={<ConstructionsIcon />}
+                />
+                <NavItem
+                  route="/bids"
+                  name="Licitaciones"
+                  icon={<BidsIcon />}
+                />
+                <NavItem
+                  route="/entities"
+                  name="Entidades"
+                  icon={<EntitiesIcon />}
+                />
+                <NavItem
+                  route="/resources"
+                  name="Recursos"
+                  icon={<ResourcesIcon />}
+                />
+
+                <NavItem
+                  route="/calendar"
+                  name="Calendario"
+                  icon={<CalendarIcon />}
+                />
+                <NavItem route="/team" name="Equipo" icon={<TeamIcon />} />
               </div>
             </div>
           </nav>

@@ -5,28 +5,23 @@ import Contact from './Contact';
 import Pagination from 'components/Pagination';
 import Actions from './Actions';
 import { useGetContactsByEntity } from 'graphql/queries/entities/getContactsByEntity';
-import useFilters from 'hooks/useFilters';
+import Badge from 'components/Badge';
 
 const Contacts = () => {
-  const { limit, offset, orderBy, setCount, ...pagination } = useFilters({
-    limit: 5,
-    filters: ['name'],
-    search: '',
-    orderBy: { default_contact: 'desc' }
-  });
-  const { data, loading } = useGetContactsByEntity({
-    limit,
-    offset,
-    orderBy,
-    setCount
-  });
+  const { data, loading, ...pagination } = useGetContactsByEntity();
+  const renderTitle = () => (
+    <div>
+      <span className="mr-1">Contactos</span>
+      {!loading && <Badge orange>{pagination.count}</Badge>}
+    </div>
+  );
   return (
     <Card>
-      <CardHeader title="Contactos" action={<Actions />} />
-      <CardContent noPadding>
-        <List loading={loading}>
-          {data?.contacts.map(({ id, ...contactInfo }, index) => (
-            <ListItem key={id} noBorder={index === 4}>
+      <CardHeader title={renderTitle()} action={<Actions />} />
+      <CardContent noPadding loading={loading}>
+        <List>
+          {data?.contacts.map((contactInfo, index) => (
+            <ListItem key={contactInfo.id} noBorder={index === 4}>
               <Contact {...contactInfo} />
             </ListItem>
           ))}

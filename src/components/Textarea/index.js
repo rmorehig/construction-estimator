@@ -6,7 +6,7 @@ const Textarea = React.forwardRef((props, ref) => {
       {props.label && (
         <label
           htmlFor={props.id}
-          className="block text-sm font-medium leading-5 text-gray-700"
+          className="block text-sm font-medium leading-5 text-gray-600"
         >
           {props.label}
         </label>

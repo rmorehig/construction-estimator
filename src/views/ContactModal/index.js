@@ -10,6 +10,23 @@ import { GridContainer, GridItem } from 'components/Grid';
 import Button from 'components/Button';
 import { useUpdateContact } from 'graphql/mutations/entities/updateContact';
 import { useAddContact } from 'graphql/mutations/entities/addContact';
+import Checkbox from 'components/Checkbox';
+
+const initialValues = {
+  entity_id: null,
+  name: '',
+  default_contact: false,
+  position: '',
+  code: '',
+  email: '',
+  phone: '',
+  address: '',
+  postal_code: null,
+  city: '',
+  province: '',
+  country: '',
+  observations: ''
+};
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Introduce el nombre del contacto'),
@@ -18,40 +35,14 @@ const validationSchema = Yup.object().shape({
   )
 });
 
-const ContactModal = ({
-  handleClose = () => {},
-  data: {
-    id,
-    name,
-    default_contact,
-    position,
-    code,
-    email,
-    phone,
-    address,
-    postal_code,
-    city,
-    province,
-    country,
-    isNew
-  } = {}
-}) => {
+const ContactModal = ({ handleClose = () => {}, data = {} }) => {
+  const { isNew, ...rest } = data;
   const { addContact } = useAddContact();
   const { updateContact } = useUpdateContact();
   const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
-      entity_id: id || null,
-      name: name || '',
-      default_contact: default_contact || false,
-      position: position || '',
-      code: code || '',
-      email: email || '',
-      phone: phone || '',
-      address: address || '',
-      postal_code: postal_code || null,
-      city: city || '',
-      province: province || '',
-      country: country || ''
+      ...initialValues,
+      ...rest
     },
     validateOnMount: false,
     validationSchema,
@@ -96,7 +87,16 @@ const ContactModal = ({
 
         <div className="px-4 py-7 border border-gray-200 sm:px-20">
           <GridContainer>
-            <GridItem xs={3}>
+            <GridItem>
+              <Checkbox
+                name="default_contact"
+                label="Contacto principal"
+                checked={values.default_contact}
+                onBlur={handleBlur}
+                onChange={handleChange}
+              />
+            </GridItem>
+            <GridItem>
               <Input
                 name="name"
                 label="Nombre"
@@ -115,7 +115,8 @@ const ContactModal = ({
                 error={errors.code}
               />
             </GridItem>
-            <GridItem>
+
+            <GridItem xs={3}>
               <Input
                 name="position"
                 label="Puesto"

@@ -4,7 +4,7 @@ import Spinner from 'components/Spinner';
 const Card = ({ children }) => (
   <div
     className="h-full flex flex-col bg-white overflow-hidden shadow rounded-lg"
-    style={{ height: '582px' }}
+    style={{ height: '580px' }}
   >
     {children}
   </div>
@@ -36,11 +36,7 @@ const CardContent = ({ children, noPadding, loading = false }) => {
       </div>
     );
   return (
-    <div
-      className={`overflow-hidden flex-1 text-sm ${
-        !noPadding && 'px-4 py-5 sm:p-6'
-      }`}
-    >
+    <div className={`flex-1 text-sm ${!noPadding && 'px-4 py-5 sm:p-6'}`}>
       {children}
     </div>
   );

@@ -12,7 +12,7 @@ export const GET_CONTACTS_BY_ENTITY = gql`
     $offset: Int
     $orderBy: [contact_order_by!]
   ) {
-    contact(
+    contacts: contact(
       limit: $limit
       offset: $offset
       order_by: $orderBy

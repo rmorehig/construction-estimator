@@ -6,7 +6,7 @@ import { useModal } from 'context/modals';
 import ProviderModal from 'views/ProviderModal';
 import Button from 'components/Button';
 const Actions = ({ data }) => {
-  const [containerRef, isOpen, open] = useDropdown();
+  const [containerRef, isOpen, openDropdown] = useDropdown();
   const { openModal } = useModal();
   return (
     <div className="flex items-center">
@@ -16,7 +16,7 @@ const Actions = ({ data }) => {
 
       <div className="ml-3 relative" ref={containerRef}>
         <div>
-          <Button type="button" onClick={open} primary>
+          <Button type="button" onClick={openDropdown} primary>
             <svg
               className="mr-1 -mx-1 h-5 w-5"
               fill="currentColor"

@@ -13,7 +13,9 @@ const Actions = () => {
       <IconButton
         variant="none"
         icon="plus"
-        onClick={() => openModal(<ContactModal />, { id, isNew: true })}
+        onClick={() =>
+          openModal(<ContactModal />, { entity_id: id, isNew: true })
+        }
       />
     </div>
   );

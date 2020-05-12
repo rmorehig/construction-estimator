@@ -36,8 +36,6 @@ const initialValues = {
   limit: 10,
   offset: 0,
   page: 1,
-  hasNext: false,
-  hasPrevious: false,
   search: '',
   filters: [],
   where: {},
@@ -70,11 +68,7 @@ const reducer = (state, { type, payload }) => {
           state.offset + state.limit < state.count ? state.page + 1 : state.page
       };
     case 'RESET_PAGINATION':
-      return { ...initialValues };
-    case 'SET_NEXT':
-      return { ...state, hasNext: payload };
-    case 'SET_PREVIOUS':
-      return { ...state, hasPrevious: payload };
+      return { ...state, offset: 0, page: 1 };
     case 'SET_SEARCH':
       return {
         ...state,
@@ -125,6 +119,10 @@ export const useFilters = (initialPattern = {}) => {
     );
     return () => timeout && clearTimeout(timeout);
   }, [search, filters]);
+
+  useEffect(() => {
+    resetPagination();
+  }, [count]);
 
   const setLimit = (payload) => dispatch({ type: 'SET_LIMIT', payload });
   const setOffset = (payload) => dispatch({ type: 'SET_OFFSET', payload });
