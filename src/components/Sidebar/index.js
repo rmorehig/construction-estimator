@@ -171,7 +171,7 @@ const Sidebar = () => {
                 <NavItem route="/bids" name="Bids" icon={<BidsIcon />} />
                 <NavItem
                   route="/entities"
-                  name="Entites"
+                  name="Entities"
                   icon={<EntitiesIcon />}
                 />
                 <NavItem

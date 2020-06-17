@@ -5,7 +5,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-          LOGO + MARCA
+          Logo here
         </h2>
       </div>
 
@@ -13,7 +13,7 @@ const Login = () => {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="mb-4 sm:mx-auto sm:w-full sm:max-w-md">
             <span className="text-center text-xl leading-9 font-medium text-gray-900">
-              Inicia sesión en tu cuenta
+              Sign in to your account
             </span>
           </div>
 
@@ -23,7 +23,7 @@ const Login = () => {
                 htmlFor="email"
                 className="block text-sm font-medium leading-5 text-gray-700"
               >
-                Correo electrónico
+                Email
               </label>
               <div className="mt-1 rounded-md shadow-sm">
                 <input
@@ -40,7 +40,7 @@ const Login = () => {
                 htmlFor="password"
                 className="block text-sm font-medium leading-5 text-gray-700"
               >
-                Contraseña
+                Password
               </label>
               <div className="mt-1 rounded-md shadow-sm">
                 <input
@@ -63,7 +63,7 @@ const Login = () => {
                   for="remember_me"
                   className="ml-2 block text-sm leading-5 text-gray-900"
                 >
-                  Mantener sesión
+                  Remember me
                 </label>
               </div>
 
@@ -72,7 +72,7 @@ const Login = () => {
                   href="#"
                   className="font-medium text-blue-500 hover:text-gray-800 focus:outline-none focus:underline transition ease-in-out duration-150"
                 >
-                  ¿No recuerdas la contraseña?
+                  Forgot your password?
                 </a>
               </div>
             </div>
@@ -82,7 +82,7 @@ const Login = () => {
                   type="submit"
                   className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out"
                 >
-                  Continuar
+                  Sign in
                 </button>
               </span>
             </div>

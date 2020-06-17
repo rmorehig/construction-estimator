@@ -9,15 +9,15 @@ import Table from 'components/Table';
 const tabs = [
   {
     id: 'materials',
-    name: 'Materiales'
+    name: 'Materials'
   },
   {
     id: 'services',
-    name: 'Servicios'
+    name: 'Services'
   },
   {
     id: 'workers',
-    name: 'Trabajadores'
+    name: 'Workers'
   }
 ];
 
@@ -35,25 +35,25 @@ const Resources = () => {
   const columns = [
     {
       id: 'name',
-      name: 'Nombre'
+      name: 'Name'
     },
     {
       id: 'model',
-      name: 'Modelo'
+      name: 'Model'
     },
     {
       id: 'manufacturer',
-      name: 'Marca'
+      name: 'Manufacturer'
     },
     {
       id: 'material_type_id',
-      name: 'Tipo'
+      name: 'Type'
     }
   ];
 
   return (
     <View
-      title="Recursos"
+      title="Resources"
       actions={<Actions search={search} onSearch={handleSearch} />}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
