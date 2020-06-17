@@ -12,17 +12,17 @@ import IconLink from 'components/IconLink';
 
 const tabs = [
   {
-    id: 'summary',
-    name: 'Detalles'
+    id: 'details',
+    name: 'Details'
   },
   {
     id: 'resources',
-    name: 'Recursos'
+    name: 'Resources'
   }
 ];
 
 const ProviderDetails = () => {
-  const { currentTab, toggleTab } = useTabs('summary');
+  const { currentTab, toggleTab } = useTabs('details');
   const { data, loading } = useGetProviderDetails();
 
   const {
@@ -43,16 +43,16 @@ const ProviderDetails = () => {
       title={name}
       parent="/entities"
       actions={<Actions data={data?.entity} />}
-      badge={{ color: 'blue', value: 'Proveedor' }}
+      badge={{ color: 'blue', value: 'Provider' }}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
         <GridItem xs={3}>
           <Card>
-            <CardHeader title="Información" />
+            <CardHeader title="Summary" />
             <CardContent noPadding loading={loading}>
               <DescriptionList>
-                <DescriptionRow term="DNI/CIF" description={code} noBorder />
+                <DescriptionRow term="Code" description={code} noBorder />
                 <DescriptionRow
                   term="Email"
                   description={
@@ -60,20 +60,20 @@ const ProviderDetails = () => {
                   }
                 />
                 <DescriptionRow
-                  term="Teléfono"
+                  term="Phone"
                   description={
                     <IconLink type="phone" value={phone} showAlways />
                   }
                 />
                 <DescriptionRow
-                  term="Dirección"
+                  term="Address"
                   description={`${address || ''} ${postal_code || ''} ${
                     city || ''
                   } ${province || ''} ${country || ''}`}
                 />
-                <DescriptionRow term="Web" description={website} />
+                <DescriptionRow term="Website" description={website} />
                 <DescriptionRow
-                  term="Observaciones"
+                  term="Observations"
                   description={observations}
                 />
               </DescriptionList>

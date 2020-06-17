@@ -128,29 +128,27 @@ const Sidebar = () => {
           <nav>
             <div className="mt-5 p-4 border-b border-gray-500">
               <h3 className="px-3 text-xs leading-4 font-semibold text-gray-500 uppercase tracking-wider">
-                Obras activas
+                Active constructions
               </h3>
               <div className="mt-2">
                 <a
                   href="#"
                   className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
                 >
-                  <span className="truncate">Reforma Universidad Almería</span>
+                  <span className="truncate">Building reform #7787</span>
                 </a>
                 <a
                   href="#"
                   className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-300 rounded-md hover:text-gray-900 hover:bg-gray-300 focus:outline-none focus:bg-gray-100 transition ease-in-out duration-150"
                 >
-                  <span className="truncate">
-                    Construcción Edificio Poeta Durbán
-                  </span>
+                  <span className="truncate">New building #1123</span>
                 </a>
                 <a
                   href="#"
                   className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-blue-400 hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                 >
                   <Icon name="plus" />
-                  <span className="ml-1 truncate">Nueva Obra</span>
+                  <span className="ml-1 truncate">New construction</span>
                 </a>
               </div>
             </div>
@@ -161,37 +159,33 @@ const Sidebar = () => {
               <div className="mt-2">
                 <NavItem
                   route="/dashboard"
-                  name="Inicio"
+                  name="Dashboard"
                   icon={<DashboardIcon />}
                 />
 
                 <NavItem
                   route="/constructions"
-                  name="Obras"
+                  name="Constructions"
                   icon={<ConstructionsIcon />}
                 />
-                <NavItem
-                  route="/bids"
-                  name="Licitaciones"
-                  icon={<BidsIcon />}
-                />
+                <NavItem route="/bids" name="Bids" icon={<BidsIcon />} />
                 <NavItem
                   route="/entities"
-                  name="Entidades"
+                  name="Entites"
                   icon={<EntitiesIcon />}
                 />
                 <NavItem
                   route="/resources"
-                  name="Recursos"
+                  name="Resources"
                   icon={<ResourcesIcon />}
                 />
 
                 <NavItem
                   route="/calendar"
-                  name="Calendario"
+                  name="Calendar"
                   icon={<CalendarIcon />}
                 />
-                <NavItem route="/team" name="Equipo" icon={<TeamIcon />} />
+                <NavItem route="/team" name="Team" icon={<TeamIcon />} />
               </div>
             </div>
           </nav>

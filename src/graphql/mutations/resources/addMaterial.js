@@ -17,7 +17,7 @@ export const useAddMaterial = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(ADD_MATERIAL, {
     onCompleted: () => {
-      setMessage('Material creado correctamente');
+      setMessage('New material created successfully');
       push('/resources');
     },
     onError: () => push('/resources')

@@ -22,7 +22,7 @@ export const useUpdateContact = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(UPDATE_CONTACT, {
     onCompleted: () => {
-      setMessage('Contacto actualizado correctamente');
+      setMessage('Contact updated successfully');
     },
     onError: () => push('/entities/')
   });

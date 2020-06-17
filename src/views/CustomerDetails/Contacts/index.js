@@ -11,7 +11,7 @@ const Contacts = () => {
   const { data, loading, ...pagination } = useGetContactsByEntity();
   const renderTitle = () => (
     <div>
-      <span className="mr-1">Contactos</span>
+      <span className="mr-1">Contacts</span>
       {!loading && <Badge orange>{pagination.count}</Badge>}
     </div>
   );

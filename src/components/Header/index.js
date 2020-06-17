@@ -34,7 +34,7 @@ const Header = () => {
                       <div className="py-1 rounded-md bg-white shadow-xs">
                         <div className="px-4 py-3">
                           <p className="text-sm leading-5 font-medium text-gray-900">
-                            Alejandro España Orts
+                            Rafael Moreno
                           </p>
                         </div>
                         <Divider />

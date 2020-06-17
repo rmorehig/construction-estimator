@@ -12,22 +12,22 @@ import Badge from 'components/Badge';
 const tabs = [
   {
     id: 'all',
-    name: 'Todo'
+    name: 'All'
   },
   {
     id: 'providers',
-    name: 'Proveedores'
+    name: 'Providers'
   },
   {
     id: 'customers',
-    name: 'Clientes'
+    name: 'Customers'
   }
 ];
 
 const columns = [
   {
     id: 'name',
-    name: 'Nombre'
+    name: 'Name'
   },
   {
     id: 'email',
@@ -35,19 +35,19 @@ const columns = [
   },
   {
     id: 'phone',
-    name: 'Teléfono'
+    name: 'Phone'
   },
   {
     id: 'city',
-    name: 'Población'
+    name: 'City'
   },
   {
     id: 'tags',
-    name: 'Etiquetas',
+    name: 'Tags',
     component: ({ provider, customer }) =>
       provider || customer ? (
         <Badge blue={provider} teal={customer}>
-          {provider ? 'Proveedor' : 'Cliente'}
+          {provider ? 'Provider' : 'Customer'}
         </Badge>
       ) : (
         <div />
@@ -75,7 +75,7 @@ const Entities = () => {
 
   return (
     <View
-      title="Entidades"
+      title="Entities"
       actions={<Actions search={search} onSearch={handleSearch} />}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />

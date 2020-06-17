@@ -19,7 +19,7 @@ export const useUpdateCustomer = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(UPDATE_CUSTOMER, {
     onCompleted: (data) => {
-      setMessage('Cliente actualizado correctamente');
+      setMessage('Customer updated successfully');
     },
     onError: () => push('/entities/')
   });

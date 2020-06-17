@@ -18,7 +18,7 @@ export const useUpdateProvider = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(UPDATE_PROVIDER, {
     onCompleted: (data) => {
-      setMessage('Proveedor actualizado correctamente');
+      setMessage('Provider updated successfully');
       //push(`/entities/providers/${data.update_entity.returning[0].id}`);
     },
     onError: () => push('/entities/')

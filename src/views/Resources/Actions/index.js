@@ -43,7 +43,7 @@ const Actions = ({ search, onSearch = () => {} }) => {
                 clipRule="evenodd"
               />
             </svg>
-            Nuevo
+            New
           </Button>
         </div>
 
@@ -60,13 +60,13 @@ const Actions = ({ search, onSearch = () => {} }) => {
                 className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                 onClick={() => openModal(<ServiceModal />)}
               >
-                Servicio
+                Service
               </button>
               <button
                 className="text-left w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                 onClick={() => openModal(<WorkerModal />)}
               >
-                Trabajador
+                Worker
               </button>
             </div>
           )}

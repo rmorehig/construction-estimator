@@ -13,15 +13,15 @@ import { useGetCustomerDetails } from 'graphql/queries/entities/getCustomerDetai
 const tabs = [
   {
     id: 'summary',
-    name: 'Detalles'
+    name: 'Details'
   },
   {
     id: 'bids',
-    name: 'Ofertas'
+    name: 'Offers'
   },
   {
     id: 'constructions',
-    name: 'Obras'
+    name: 'Constructions'
   }
 ];
 
@@ -52,27 +52,27 @@ const CustomerDetails = () => {
       title={name}
       parent="/entities"
       actions={<Actions data={data.entity} />}
-      badge={{ color: 'teal', value: 'Cliente' }}
+      badge={{ color: 'teal', value: 'Customer' }}
     >
       <Tabs value={currentTab} tabs={tabs} onChange={toggleTab} />
       <GridContainer>
         <GridItem xs={3}>
           <Card>
-            <CardHeader title="Información" />
+            <CardHeader title="Summary" />
             <CardContent noPadding>
               <DescriptionList>
-                <DescriptionRow term="DNI/CIF" description={code} noBorder />
+                <DescriptionRow term="Code" description={code} noBorder />
                 <DescriptionRow term="Email" description={email} />
-                <DescriptionRow term="Teléfono" description={phone} />
+                <DescriptionRow term="Phone" description={phone} />
                 <DescriptionRow
-                  term="Dirección"
+                  term="Address"
                   description={`${address || ''} ${postal_code || ''} ${
                     city || ''
                   } ${province || ''} ${country || ''}`}
                 />
-                <DescriptionRow term="Web" description={website} />
+                <DescriptionRow term="Website" description={website} />
                 <DescriptionRow
-                  term="Observaciones"
+                  term="Observations"
                   description={observations}
                 />
               </DescriptionList>

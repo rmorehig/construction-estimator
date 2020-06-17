@@ -10,7 +10,7 @@ const Actions = ({ data }) => {
   return (
     <div className="flex items-center">
       <Button type="button" onClick={() => openModal(<CustomerModal />, data)}>
-        Editar
+        Edit
       </Button>
 
       <div className="ml-3 relative" ref={containerRef}>
@@ -35,11 +35,11 @@ const Actions = ({ data }) => {
           {isOpen && (
             <div className="py-1 rounded-md bg-white shadow-xs">
               <span className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                Oferta
+                Offer
               </span>
               <Divider />
               <span className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                Contacto
+                Contact
               </span>
             </div>
           )}

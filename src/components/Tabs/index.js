@@ -8,11 +8,11 @@ const Tabs = ({ value, tabs = [], onChange = () => {} }) => {
           aria-label="Selected tab"
           className="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5 transition ease-in-out duration-150"
         >
-          <option selected>Todo</option>
-          <option>Materiales</option>
-          <option>Servicios</option>
-          <option>Trabajadores</option>
-          <option>Clientes</option>
+          <option selected>All</option>
+          <option>Materials</option>
+          <option>Services</option>
+          <option>Workers</option>
+          <option>Customers</option>
         </select>
       </div>
       <div className="hidden sm:block">
@@ -49,8 +49,8 @@ const handleSteps = async (event, index) => {
   }
 };
 const { steps, currentStep, nextStep, previousStep, setStep } = useSteps([
-  '1. Detalles',
-  '2. Opcional'
+  '1. Details',
+  '2. Optional'
 ]);
 
 const handleNextStep = async (event) => {

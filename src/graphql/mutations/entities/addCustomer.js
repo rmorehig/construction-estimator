@@ -17,7 +17,7 @@ export const useAddCustomer = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(ADD_CUSTOMER, {
     onCompleted: () => {
-      setMessage('Cliente creado correctamente');
+      setMessage('New customer created successfully');
       push('/entities');
     },
     onError: () => push('/entities')

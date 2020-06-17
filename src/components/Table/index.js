@@ -112,7 +112,7 @@ const Table = React.memo(
                   ? limit
                   : count - offset + limit
               } de ${count}`}</span>
-              {count === 1 ? ' resultado' : ' resultados'}
+              {count === 1 ? ' result' : ' results'}
             </p>
           </div>
           <div className="flex-1 flex justify-between sm:justify-end">

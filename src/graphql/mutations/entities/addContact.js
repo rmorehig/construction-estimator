@@ -23,7 +23,7 @@ export const useAddContact = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(ADD_CONTACT, {
     onCompleted: () => {
-      setMessage('Contacto creado correctamente');
+      setMessage('New contact created successfully');
     },
     onError: () => push('/entities')
   });

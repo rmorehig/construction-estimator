@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
-import { useHistory } from 'react-router-dom'
-import { useNotifications } from 'context/notifications'
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
+import { useNotifications } from 'context/notifications';
 export const ADD_PROVIDER = gql`
   mutation addProvider($objects: [provider_insert_input!]!) {
     insert_provider(objects: $objects) {
@@ -10,18 +10,18 @@ export const ADD_PROVIDER = gql`
       }
     }
   }
-`
+`;
 
 export const useAddProvider = () => {
-  const { push } = useHistory()
-  const { setMessage } = useNotifications()
+  const { push } = useHistory();
+  const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(ADD_PROVIDER, {
     onCompleted: () => {
-      setMessage('Proveedor creado correctamente')
-      push('/providers')
+      setMessage('New provider successfully created');
+      push('/providers');
     },
-    onError: () => push('/providers'),
-  })
+    onError: () => push('/providers')
+  });
   return {
     addProvider: ({
       name,
@@ -33,7 +33,7 @@ export const useAddProvider = () => {
       postal_code,
       city,
       province,
-      country,
+      country
     }) =>
       mutate({
         variables: {
@@ -49,14 +49,14 @@ export const useAddProvider = () => {
                 postal_code,
                 city,
                 province,
-                country,
-              },
-            },
-          },
-        },
+                country
+              }
+            }
+          }
+        }
       }),
     data,
     error,
-    loading,
-  }
-}
+    loading
+  };
+};

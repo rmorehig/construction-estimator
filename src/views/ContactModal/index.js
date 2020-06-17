@@ -29,10 +29,8 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Introduce el nombre del contacto'),
-  email: Yup.string().email(
-    'Introduce un email con formato válido: usuario@correo.com'
-  )
+  name: Yup.string().required('Name is a required field'),
+  email: Yup.string().email('Invalid email format')
 });
 
 const ContactModal = ({ handleClose = () => {}, data = {} }) => {
@@ -61,7 +59,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            {`${isNew ? 'Nuevo' : 'Editar'} contacto`}
+            {`${isNew ? 'New' : 'Edit'} contact`}
           </h3>
 
           <button
@@ -90,7 +88,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <GridItem>
               <Checkbox
                 name="default_contact"
-                label="Contacto principal"
+                label="Main contact"
                 checked={values.default_contact}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -99,7 +97,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <GridItem>
               <Input
                 name="name"
-                label="Nombre"
+                label="Name"
                 value={values.name}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -108,7 +106,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             </GridItem>
             <GridItem xs={3}>
               <Input
-                label="DNI / CIF"
+                label="Code"
                 name="code"
                 value={values.code}
                 onChange={handleChange}
@@ -119,7 +117,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <GridItem xs={3}>
               <Input
                 name="position"
-                label="Puesto"
+                label="Position"
                 value={values.position}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -129,7 +127,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <GridItem xs={3}>
               <Input
                 name="phone"
-                label="Teléfono"
+                label="Phone"
                 value={values.phone}
                 onChange={handleChange}
                 error={errors.phone}
@@ -146,7 +144,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             </GridItem>
             <div className="col-span-6 lg:col-span-4">
               <Input
-                label="Dirección"
+                label="Address"
                 name="address"
                 value={values.address}
                 onChange={handleChange}
@@ -155,7 +153,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             </div>
             <div className="col-span-6 lg:col-span-2">
               <Input
-                label="Código postal"
+                label="Postal code"
                 name="postal_code"
                 value={values.postal_code}
                 onChange={handleChange}
@@ -165,7 +163,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <div className="col-span-6 lg:col-span-2">
               <Input
                 name="city"
-                label="Ciudad"
+                label="City"
                 value={values.city}
                 onChange={handleChange}
               />
@@ -173,7 +171,7 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <div className="col-span-6 lg:col-span-2">
               <Input
                 name="province"
-                label="Provincia"
+                label="Province"
                 value={values.province}
                 onChange={handleChange}
               />
@@ -181,19 +179,20 @@ const ContactModal = ({ handleClose = () => {}, data = {} }) => {
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <Select
                 name="country"
-                label="País"
+                label="Country"
                 value={values.country}
                 onChange={handleChange}
               >
-                <option>España</option>
-                <option>Estados Unidos</option>
-                <option>Francia</option>
+                <option>Spain</option>
+                <option>Italy</option>
+                <option>France</option>
+                <option>Other</option>
               </Select>
             </div>
             <GridItem>
               <Textarea
                 id="observations"
-                label="Observaciones"
+                label="Observations"
                 value={values.observations}
                 onChange={handleChange}
                 rows="3"

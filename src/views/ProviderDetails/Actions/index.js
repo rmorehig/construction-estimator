@@ -11,7 +11,7 @@ const Actions = ({ data }) => {
   return (
     <div className="flex items-center">
       <Button type="button" onClick={() => openModal(<ProviderModal />, data)}>
-        Editar
+        Edit
       </Button>
 
       <div className="ml-3 relative" ref={containerRef}>
@@ -45,20 +45,20 @@ const Actions = ({ data }) => {
                 className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                 to="/resources/services/new"
               >
-                Servicio
+                Service
               </Link>
               <Link
                 className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                 to="/resources/workers/new"
               >
-                Trabajador
+                Worker
               </Link>
               <Divider />
               <Link
                 className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                 to="/entities/contacts/new"
               >
-                Contacto
+                Contact
               </Link>
             </div>
           )}

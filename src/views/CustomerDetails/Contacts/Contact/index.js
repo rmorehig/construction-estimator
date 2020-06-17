@@ -26,19 +26,23 @@ const Contact = (props) => {
         </div>
         <div className="mt-2 sm:flex sm:justify-between">
           <div className="sm:flex">
-            <div className="mr-3 text-gray-400">
-              <IconLink type="email" value={email} />
-            </div>
-            <div className="mt-2 flex items-center text-gray-400 sm:mt-0">
-              <IconLink type="phone" value={phone} />
-            </div>
+            {email && (
+              <div className="mr-3 text-gray-400">
+                <IconLink type="email" value={email} />
+              </div>
+            )}
+            {phone && (
+              <div className="mt-2 flex items-center text-gray-400 sm:mt-0">
+                <IconLink type="phone" value={phone} />
+              </div>
+            )}
           </div>
         </div>
       </div>
       <div className="flex-1 flex-shrink-0 flex items-center justify-end">
         {default_contact && (
           <Badge green className="mr-2">
-            Principal
+            Main contact
           </Badge>
         )}
         {position && <Badge gray>{position}</Badge>}
@@ -48,10 +52,10 @@ const Contact = (props) => {
               openModal(<ContactModal />, { ...props, isNew: false })
             }
           >
-            Editar
+            Edit
           </MenuItem>
           <MenuItem onClick={() => deleteContact({ id, entity_id })}>
-            Eliminar
+            Delete
           </MenuItem>
         </Menu>
       </div>

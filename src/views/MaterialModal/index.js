@@ -34,7 +34,7 @@ const MaterialModal = ({ handleClose, data }) => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            Nuevo material
+            New material
           </h3>
 
           <button

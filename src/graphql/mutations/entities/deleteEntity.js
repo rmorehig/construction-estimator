@@ -16,16 +16,14 @@ export const DELETE_CONTACT = gql`
   ${CONTACT_FRAGMENT}
 `;
 
-export const useAddContact = () => {
+export const useDeleteContact = () => {
   const { setMessage } = useNotifications();
   let [mutate, { data, loading, error }] = useMutation(DELETE_CONTACT, {
     onCompleted: () => {
-      setMessage('Contacto eliminado correctamente');
+      setMessage('Contact successfully deleted');
     },
     onError: () => {
-      setMessage(
-        'Error al eliminar el contacto seleccionado. Inténtelo de nuevo.'
-      );
+      setMessage('Failed to delete the selected contact. Try again later.');
     }
   });
   return {

@@ -11,10 +11,8 @@ import Button from 'components/Button';
 import { useUpdateProvider } from 'graphql/mutations/entities/updateProvider';
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Introduce el nombre del proveedor'),
-  email: Yup.string().email(
-    'Introduce un email con formato válido: usuario@correo.com'
-  )
+  name: Yup.string().required('Name is a required field'),
+  email: Yup.string().email('Invalid format email')
 });
 
 const ProviderModal = ({ handleClose, data }) => {
@@ -52,7 +50,7 @@ const ProviderModal = ({ handleClose, data }) => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between bg-blue-500 px-4 py-6 sm:px-6">
           <h3 className="text-lg leading-6 font-normal text-white">
-            {`${data ? 'Editar' : 'Nuevo'} proveedor`}
+            {`${data ? 'Edit' : 'New'} provider`}
           </h3>
 
           <button
@@ -81,7 +79,7 @@ const ProviderModal = ({ handleClose, data }) => {
             <GridItem xs={3}>
               <Input
                 name="name"
-                label="Nombre"
+                label="Name"
                 value={values.name}
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -90,7 +88,7 @@ const ProviderModal = ({ handleClose, data }) => {
             </GridItem>
             <GridItem xs={3}>
               <Input
-                label="DNI / CIF"
+                label="Code"
                 id="code"
                 value={values.code}
                 onChange={handleChange}
@@ -100,7 +98,7 @@ const ProviderModal = ({ handleClose, data }) => {
             <div className="col-span-6 lg:col-span-3">
               <Input
                 name="phone"
-                label="Teléfono"
+                label="Phone"
                 value={values.phone}
                 onChange={handleChange}
                 error={errors.phone}
@@ -117,7 +115,7 @@ const ProviderModal = ({ handleClose, data }) => {
             </div>
             <div className="col-span-6 lg:col-span-4">
               <Input
-                label="Dirección"
+                label="Address"
                 name="address"
                 value={values.address}
                 onChange={handleChange}
@@ -126,7 +124,7 @@ const ProviderModal = ({ handleClose, data }) => {
             </div>
             <div className="col-span-6 lg:col-span-2">
               <Input
-                label="Código postal"
+                label="Postal code"
                 name="postal_code"
                 value={values.postal_code}
                 onChange={handleChange}
@@ -136,7 +134,7 @@ const ProviderModal = ({ handleClose, data }) => {
             <div className="col-span-6 lg:col-span-2">
               <Input
                 name="city"
-                label="Ciudad"
+                label="City"
                 value={values.city}
                 onChange={handleChange}
               />
@@ -144,7 +142,7 @@ const ProviderModal = ({ handleClose, data }) => {
             <div className="col-span-6 lg:col-span-2">
               <Input
                 name="province"
-                label="Provincia"
+                label="Province"
                 value={values.province}
                 onChange={handleChange}
               />
@@ -152,19 +150,20 @@ const ProviderModal = ({ handleClose, data }) => {
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <Select
                 name="country"
-                label="País"
+                label="Country"
                 value={values.country}
                 onChange={handleChange}
               >
-                <option>España</option>
-                <option>Estados Unidos</option>
-                <option>Francia</option>
+                <option>Spain</option>
+                <option>Italy</option>
+                <option>France</option>
+                <option>Other</option>
               </Select>
             </div>
 
             <GridItem>
               <Input
-                label="Web"
+                label="Website"
                 id="website"
                 value={values.website}
                 onChange={handleChange}
@@ -174,7 +173,7 @@ const ProviderModal = ({ handleClose, data }) => {
             <GridItem>
               <Textarea
                 id="observations"
-                label="Observaciones"
+                label="Observations"
                 value={values.observations}
                 onChange={handleChange}
                 rows="3"
@@ -186,10 +185,10 @@ const ProviderModal = ({ handleClose, data }) => {
 
         <div className="bg-white px-4 py-5 sm:px-6 sm:flex sm:flex-row-reverse">
           <Button type="submit" primary className="sm:ml-3">
-            Guardar
+            Save
           </Button>
           <Button type="button" className="mt-2 sm:mt-0" onClick={handleClose}>
-            Cancelar
+            Cancel
           </Button>
         </div>
       </form>
